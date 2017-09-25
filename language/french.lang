@@ -1,0 +1,823 @@
+﻿<lang>
+  <key name="L_no_target">Aucune cible</key>
+  <key name="L_bot_mode">Mode bot</key>
+  <key name="C_bot_mode_auto_attack">Attaque Auto.</key>
+  <key name="C_bot_mode_garter">Récolte</key>
+  <key name="C_bot_mode_attack_on_target">Attaque de la cible</key>
+  <key name="C_bot_mode_quest">Quête</key>
+  <key name="C_use_waypoints">Sur la route
+(Waypoint)</key>
+  <key name="C_dead_waypoints">Commencer avec 
+le retour</key>
+  <key name="L_mini_statistics">Statistiques</key>
+  <key name="B_start">Démarrer</key>
+  <key name="B_stop">Arrêter</key>
+  <key name="B_search_player">Trouver Perso.</key>
+  <key name="L_coordinates_player">Coordonnées</key>
+  <key name="L_coordinates_player_run">Déplacement</key>
+  <key name="L_coordinates_player_stop">Action</key>
+  <key name="L_target_no_gart">Taux de collecte faible</key>
+  <key name="L_target_gart">Vous pouvez collecter</key>
+  <key name="L_atk_header">Attaque</key>
+  <key name="TAB_atk_select_target">Ciblage</key>
+  <key name="L_atk_st_dist_player">Radius du personnage:</key>
+  <key name="L_atk_st_dist_waypoint">Radius du point de depart:</key>
+  <key name="L_atk_st_target_lvl">Niveau cible:</key>
+  <key name="L_atk_st_target_is">La cible doit etre:</key>
+  <key name="C_atk_st_target_agro">Aggressive</key>
+  <key name="C_atk_st_target_passive">Passive</key>
+  <key name="C_atk_st_name_contains">Noms des monstres à sélectionner (Liste blanche):*</key>
+  <key name="C_atk_st_name_no_contains">Noms des monstres à ne pas sélectionner (Liste noire):*</key>
+  <key name="Desc_atk_st_name_contains">* possible de séparer les noms par des virgules</key>
+  <key name="C_atk_st_not_choose_any">Ne pas choisir d autre monstres</key>
+  <key name="C_atk_st_skip_if_not_attack">Ignore la cible, si impossible à attaquer</key>
+  <key name="GL_sec">sec</key>
+  <key name="GL_min">min</key>
+  <key name="GL_hour">h</key>
+  <key name="Desc_atk_st">Important! Si malgrès tout une cible ignorée vous attaque, votre personnage l'attaquera également en dépit des paramètres ci-dessus</key>
+  <key name="TAB_atk_skills">Sorts</key>
+  <key name="L_atk_sk_available">Disponible</key>
+  <key name="Desc_atk_sk_available">* double click - ajouter</key> 
+  <key name="B_atk_sk_skills_update">Mettre à jour les sorts</key> 
+  <key name="C_atk_sk_only_up_lvl">Derniers niveaux des sorts</key> 
+  <key name="L_atk_sk_tree_skills">Paramètre d'enchainement des sorts</key>
+  <key name="N_atk_sk_before_attack">Avant d'attaquer</key>
+  <key name="N_atk_sk_attacking_skills">Sort offensif</key>
+  <key name="N_atk_sk_combo_skills">Sort d'enchainement</key>
+  <key name="N_atk_sk_after_win">Après avoir tué</key>
+  <key name="N_atk_sk_before_attack_desc">Tous sorts lancés avant le cycle d'attaque</key>
+  <key name="N_atk_sk_attacking_skills_desc">Cycle d'attaque standard</key>
+  <key name="N_atk_sk_combo_skills_desc">Tous les sorts d'enchainement, devant être utilisé par le personnage</key>
+  <key name="N_atk_sk_after_win_desc">Actions faites après avoir tué un monstre et ramassé les objets</key>
+  <key name="Desc_atk_sk_tree_skills">* appuyer sur Suppr pour supprimer</key>
+  <key name="LC_atk_sk_conditions_skill">Conditions du sorts</key>
+  <key name="LC_atk_sk_conditions_skill2">Conditions pour {0}</key>
+  <key name="Desc_atk_sk_conditions_skill">* Insert - ajouter | Suppr - supprimer</key>
+  <key name="R_atk_sk_conditions_all">Ttes conditions</key>
+  <key name="R_atk_sk_conditions_any">Chaque condition</key>
+  <key name="TAB_atk_regen">Regen / résurrection</key>
+  <key name="C_atk_use_but_regen">Pour la résurrection de cliquer sur un bouton (de haut en bas):</key>
+  <key name="C_atk_but_regen_first">Premier bouton</key>
+  <key name="C_atk_but_regen_last">Dernier bouton</key>
+  <key name="G_atk_co_conditions">Actions faites par condition</key>
+  <key name="LC_atk_co_condition">Condition</key>
+  <key name="LC_atk_co_action">Action</key>
+  <key name="Desc_atk_co_conditions">* Insert - ajouter | Suppr - supprimer</key>
+  <key name="B_atk_co_test_conditions">Tester</key>
+  <key name="G_atk_co_regen">Regeneration HP and MP</key>
+  <key name="C_atk_co_hp_regen">Assis quand HP &lt;</key>
+  <key name="C_atk_co_mp_regen">Assis quand MP &lt;</key>
+  <key name="C_atk_co_hp_regen_to100">%  à 95%</key>
+  <key name="C_atk_co_mp_regen_to100">%  à 95%</key>
+  <key name="TAB_atk_additionally">Compléments</key>
+  <key name="C_atk_ad_skills_order">Utilise "strictement" les sorts les uns après les autres</key>
+  <key name="L_atk_ad_max_time_skill">Temps maximum pour utiliser un sort</key>
+  <key name="Desc_atk_ad_max_time_skill">Si un sort n'est pas dans l'ordre précis le bot va passer au sort suivant dans le délai renseigné (minimum de 1000ms).</key>
+  <key name="C_atk_ad_looting">Prendre les objets après la mort du monstre</key>
+  <key name="Desc_atk_ad_looting">[?] Si vous désactivezcette option, le bot ne ramassera plus automatiquement</key>
+  <key name="C_atk_ad_looting_antifreeze">Antiblocage durant la ramassage</key>
+  <key name="L_atk_ad_looting_antifreeze">fois</key>
+  <key name="Desc_atk_ad_looting_antifreeze">[?] Cela est recommandé si le rammasage est proposé par le serveur</key>
+  <key name="C_atk_ad_looting_near">Ramasser les corps abandonnés dans les</key>
+  <key name="Desc_atk_ad_looting_near">Permet de ramasser les corps abandonnés</key>
+  <key name="C_atk_ad_pause_after_dead_mob">Prendre une pause après la mort du monstre</key>
+  <key name="Desc_atk_ad_pause_after_dead_mob">Permet de prendre une pause après voir tué un montre...</key>
+  <key name="L_gart_header">Récolte</key> 
+  <key name="L_gart_distance">Radius du trajet de récolte</key>
+  <key name="G_gart_primary_options">Paramètre de base</key>
+  <key name="L_gart_chat_command">Sélection de la ressource par commande</key>
+  <key name="C_gart_auto_attack">Collecter les ressources en Auto Attaque</key>
+  <key name="L_gart_macro">Bouton avec macro de récolte</key>
+  <key name="L_gart_max_time">Temps max. passé pour collecter 1 ressource</key>
+  <key name="C_gart_lvl_for">Niveau de récolte min</key>
+  <key name="L_gart_lvl_to">max</key>
+  <key name="C_gart_name_res">Nom de ressource: (case sensitive)</key>
+  <key name="LC_gart_col_name">Nom</key>
+  <key name="LC_gart_col_macro">Macro</key>
+  <key name="Desc_gart_list">* Insert - ajouter   Suppr - supprimer    Double-click - éditer</key>
+  <key name="C_gart_atk">Répondre aux attaques des monstres et joueurs aggressifs</key>
+  <key name="C_gart_skip_if_near_player">Laisser la ressource si elle est déjà prise par un autre joueur</key>
+  <key name="G_gart_fly">Vol</key>
+  <key name="C_gart_fly_goto_base">(sec) de vol, arrêter de récolter au-delà de</key>
+  <key name="C_gart_percent_to_new_fly">(%) de vol à atteindre avant le décollage</key>
+  <key name="L_rad_header">Radar</key>
+  <key name="G_rad_filter">Filtre</key>
+  <key name="C_rad_players">Joueurs de même race</key>
+  <key name="C_rad_enemy">Joueurs ennemis</key>
+  <key name="C_rad_NPC_friendly">NPC allié</key>
+  <key name="C_rad_NPC_agro">Mob / NPC ennemi</key>
+  <key name="C_rad_gather">Ressources</key>
+  <key name="C_rad_other">Obj. divers</key>
+  <key name="L_rad_name_contains">Nom à mettre en valeur:</key>
+  <key name="L_rad_level">Niveau &gt;</key>
+  <key name="C_rad_altitude">L'altitude diffère de</key>
+  <key name="C_rad_waypoints">Route (WayPoints)</key>
+  <key name="G_rad_info">Propriété des informations d'affichage</key>
+  <key name="C_rad_info_name">Nom</key>
+  <key name="C_rad_info_altitude">Altitude</key>
+  <key name="C_rad_info_type">Type</key>
+  <key name="C_rad_info_level">Niveau</key>
+  <key name="C_rad_info_range">Cercle d'aggro</key>
+  <key name="C_rad_info_health">Vie</key>
+  <key name="C_rad_info_distance">Distance</key>
+  <key name="C_rad_info_class">Classe</key>
+  <key name="C_rad_info_i_target">Je suis ciblé</key>
+  <key name="G_rad_config">Configuration</key>
+  <key name="L_rad_config_zoom">Zoom (%)</key>
+  <key name="L_rad_config_pause">Rafraichissement</key>
+  <key name="C_rad_config_rotate">Rotation du radar comme la camera</key>
+  <key name="C_rad_config_on_top">En premier plan</key>
+  <key name="L_rad_config_size">Taille du radar</key>
+  <key name="C_rad_config_point_to_move">Point de déplacement</key>
+  <key name="L_rad_config_opacity">Transparence du radar</key>
+  <key name="B_rad_start">Démarrer le Radar</key>
+  <key name="B_rad_stop">Arrêter le Radar</key>
+  <key name="B_rad_combat_start">Combat</key>
+  <key name="L_way_header">Votre Route (Waypoints)</key>
+  <key name="TAB_way_rec_select">Principale</key>
+  <key name="G_way_rec_new_way">Enregistrer une nouvelle route</key>
+  <key name="L_way_rec_type_new_way">Type:</key>
+  <key name="L_way_rec_name_new_way">Nom:</key>
+  <key name="L_way_rec_dist_new_way">Distance entre les points</key>
+  <key name="B_way_rec_new_way">Démarrer</key>
+  <key name="B_way_rec_new_way_stop">Arrêter</key>
+  <key name="G_way_rec_select_way">Routes utilisées</key>
+  <key name="L_way_rec_pause_after">Pause après chaque cycle</key>
+  <key name="TAB_way_anti">Anti Arrêt</key>
+  <key name="C_way_anti_09">Rotation 110 degrees</key>
+  <key name="L_way_anti_if_first">si le premier</key>
+  <key name="L_way_anti_sec">secondes</key>
+  <key name="L_way_anti_run_mini">Se déplace de</key>
+  <key name="C_way_anti_stop">Arret déplacement</key>
+  <key name="C_way_anti_return">Utilise le sort "Retour" (teleport)</key>
+  <key name="L_way_anti_if_no_ran">Si le point n'est pas atteind:</key>
+  <key name="L_way_anti_if_dist_point">Si la distance du point ></key>
+  <key name="TAB_way_add">Compléments</key>
+  <key name="C_way_add_rize">Ressusciter automatiquement après la mort</key>
+  <key name="Desc_way_add_rize">[Trajet uniquement lié à la mort qui ne génère aucune attaque]</key>
+  <key name="L_way_add_wait_after_rize">Après le retour à la vie attendre sur place</key>
+  <key name="C_way_add_not_atk_after_rize">Lors du retour (route de mort), ne pas attaquer les monstres</key>
+  <key name="C_way_add_regen_end_way">À la fin de la route lancer la régénération des HP et MP</key>
+  <key name="Desc_way_add_regen_end_way">[ résumé du cycle de regénération et de pause ]</key>
+  <key name="C_way_add_no_fly_end_way">A la fin de la route, si en vol, replier les ailes</key>
+  <key name="C_way_add_quest_return">Utiliser le sort "Retour" à l'obélisque pour valider la quête</key>
+  <key name="L_craft_header">Artisanat</key>
+  <key name="B_craft_wizzard">Formation</key>
+  <key name="L_craft_macro">Bouton macro pour sélectionner le master-NPC</key>
+  <key name="L_craft_example_macro">[?] Exemple de macro:
+/select Utis
+/attack</key>
+  <key name="L_craft_num">Nombre de répétition de l'artisanat</key>
+  <key name="Desc_craft_num">[?] Nombre de répétition de la tâche. "0" - sans limite.</key>
+  <key name="L_craft_stop_after_fall">Arrêt après trop d'échecs d'affilés</key>
+  <key name="B_craft_start">Lancer</key>
+  <key name="L_craft_key_desc1">Moments clés de l'artisanat:</key>
+  <key name="L_craft_key_desc2">- Achat de matériels non pris en charge.
+- La fenêtre de jeu doit être active.
+Si ce n'est pas actif, alors arrêt immédiatement du métier.
+- Après avoir écrit de ne pas modifier l'emplacement des fenêtres.
+- Fenêtre "fabrication" doit être ouverte.</key>
+  <key name="L_opt_header">Paramètres Généraux</key>
+  <key name="TAB_opt_base">Principale</key>
+  <key name="C_opt_base_num_game_windows">Numérotation de la fenêtre de jeu au démarrage</key>
+  <key name="C_opt_base_top_form">En haut de toutes les fenêtres</key>
+  <key name="C_opt_base_pause_if_friendly">Mettre le bot en pause, si il ya d'autres personnes</key>
+  <key name="C_opt_base_minimize">Réduire le jeu et restaurer si nécessaire</key>
+  <key name="C_opt_base_restore">Restaurer la fenêtre de jeu à sa taille d'origine</key>
+  <key name="L_opt_base_pause_if_friendly_dist1">à une distance</key>
+  <key name="L_opt_base_pause_if_friendly_dist2">m ou plus proche</key>
+  <key name="L_opt_base_pause_if_friendly_time">et faire une pause de</key>
+  <key name="L_opt_base_pause_if_friendly_ignore">ignorer:</key>
+  <key name="L_opt_base_skill_button">Le bouton utilisé pour les sorts</key>
+  <key name="C_opt_base_send_stats">Envoi des statistiques au site</key>
+  <key name="C_opt_base_run_radar_after_select_client">Exécutez le radar, après avoir sélectionné le chemin du jeu</key>
+  <key name="L_opt_base_transparency">Transparence de la fenêtre</key>
+  <key name="L_opt_base_language">Langue:</key>
+
+  <key name="TAB_opt_profile">Profiles</key>
+  <key name="LC_opt_list_profile_col_name">Niveau</key>
+  <key name="LC_opt_list_profile_col_class">Classe</key>
+  <key name="B_opt_profile_update">Mise à Jour</key>
+  <key name="B_opt_profile_load">Charger</key>
+  <key name="B_opt_profile_save">Enregistrer sous...</key>
+
+  <key name="TAB_opt_keys">Touches</key>
+  <key name="L_opt_keys_tab">Sélectionner l'ennemi le plus prêt</key>
+  <key name="L_opt_keys_f1">Auto sélection</key>
+  <key name="L_opt_keys_f8">Sélectionne la cible la plus proche</key>
+  <key name="L_opt_keys_f9">Sélectionne l'objet le plus proche</key>
+  <key name="L_opt_keys_x">Combat / Normal</key>
+  <key name="L_opt_keys_pageup">Décollage</key>
+  <key name="L_opt_keys_pagedown">Attérissage</key>
+  <key name="L_opt_keys_j">Mission / Quête</key>
+
+  <key name="L_opt_sound_header">Sons et Alarmes</key>
+  <key name="С_opt_sound">Son</key>
+  <key name="С_opt_sound_exit">Fermer le jeu</key>
+  <key name="L_opt_sound_dead">Mort</key>
+  <key name="L_opt_sound_inventory">Inventaire</key>
+  <key name="L_opt_sound_enemy">Ennemi</key>
+  <key name="L_opt_sound_frendly">Ami</key>
+  <key name="L_opt_sound_gm">GM</key>
+  <key name="L_opt_sound_stop">Arret</key>
+  <key name="L_opt_sound_start">Lancer</key>
+  <key name="L_opt_sound_pause">Pause [+]</key>
+  <key name="L_opt_sound_resume">Pause [-]</key>
+  <key name="L_opt_sound_pm">Privé</key>
+  <key name="L_opt_sound_level">Niveau</key>
+  <key name="C_opt_sound_pm_white">+ discussion "bl"</key>
+  <key name="C_opt_chat_log">Ecrire les messages privés dans un fichier</key>
+  <key name="L_opt_sound_master_value">Volume principal</key>
+  <key name="TAB_opt_hot">Raccourcis clavier</key>
+  <key name="L_opt_hot_desc">Raccourcis globaux.
+Ils fonctionnent à tout moment et n'importe où, lors de l'exécution bot.
+Pour changer, cliquez sur la zone de texte
+puis appuyez sur la combinaison de touches souhaitées.
+Ps: En utilisant une combinaison de touches Alt, Ctrl et / ou Maj</key>
+  <key name="С_opt_hot_start_stop">Démarrer / Arrêter le bot</key>
+  <key name="С_opt_hot_pause">Pause / Reprendre</key>
+  <key name="С_opt_hot_craft_wizzard">Formation (artisanat et Quete)</key>
+  <key name="С_opt_hot_radar">Démarrer / Arrêter le Radar</key>
+  <key name="B_opt_hot_reset">Remise à Zero</key>
+  <key name="L_find_wellcome">Bienvenue!</key>
+  <key name="L_find_client_window">Fenêtre du client de jeu :</key>
+  <key name="L_find_client_version">Version du client :</key>
+  <key name="L_find_enter_key">Entrer la clé</key>
+  <key name="B_find_enter_key">Entrer ({0} tentative(s))</key>
+  <key name="L_about_version">Version</key>
+  <key name="L_about_autor">Auteur</key>
+  <key name="L_about_distribution">Distribution</key>
+  <key name="L_about_distribution_desc">Pay</key>
+  <key name="L_about_license">Type de Licence</key>
+  <key name="L_about_license_desc">1 key = 1 bot
+pour n'importe quel ordinateur</key>
+  <key name="L_about_site">Site Support</key>
+  <key name="L_about_text">En utilisant ce programme vous acceptez que son auteur, et/ou le vendeur ne soient pas tenus pour responsable : de fournir un programme pouvant être interdit par Gameforge / NCSoft, ou contenir des erreurs, ou ne pas répondre à vos exigences.
+Vous utilisez ce programme en toutes connaissances de causes et risques (ban et autres).
+Traduction FR - Hellpwn</key>
+  <key name="log_user_dead">Personnage mort</key>
+  <key name="log_user_res">Retour à la vie</key>
+  <key name="log_very_small_window">La fênetre est trop petite, la résurrection a été annulée...</key>
+  <key name="log_success_res">Retour à la vie réussi</key>
+  <key name="log_waypoints_res">Route du retour à la vie: {0}</key>
+  <key name="log_waypoints_dead_not_set">Route de retour à la vie non spécifiée.</key>
+  <key name="log_res_not_success">Retour à la vie échoué...</key>
+  <key name="log_exit_to_game">Quitter le jeu...</key>
+  <key name="log_find_number_windows">Fenêtre de jeu trouvé: {0}</key>
+  <key name="log_numbering_windows">Fenêtre numérotée.</key>
+  <key name="log_game_not_find">Jeu non trouvé dans le système!</key>
+  <key name="log_error_profile">Erreur de profile {0}</key>
+  <key name="log_select_true_profile">Sélection du profile approprié.</key>
+  <key name="log_select_not_profile">Profile approprié non trouvé.</key>
+  <key name="log_create_new_profile">Cela va créer un nouveau Global.profile.</key>
+  <key name="log_new_profile_name">Profile 1 - {0}</key>
+  <key name="log_new_version_bot">Version détectée {0}</key>
+  <key name="Form_new_version_bot_update">Mise à Jour: Version {0}</key>
+  <key name="Form_new_version_l_canges">Changements depuis la dernière version:</key>
+  <key name="Form_new_version_b_update">Mise à Jour</key>
+  <key name="Form_new_version_b_cancel">Ne pas Mettre à Jour</key>
+  <key name="Form_new_version_l_recomend">Encouragé de mettre à jour</key>
+  <key name="log_error_info_version">Récupération des informations de version échouée</key>
+  <key name="log_error_lost_game_window">Erreur: Perte de la fenêtre de jeu.</key>
+  <key name="log_error_lost_player">Erreur: Impossible de trouvé le personnage en jeu.</key>
+  <key name="log_crit_error">Erreur critique: {0}</key>
+  <key name="log_type_waypoints_normal">Type de Route: Normal</key>
+  <key name="log_type_waypoints_return">Type de Route: Return</key>
+  <key name="log_type_waypoints_quest">Type de Route: Quête</key>
+  <key name="log_start_running">Déplacement (En cours)</key>
+  <key name="log_stop_running_pause">Arrêt de déplacement (Arrêt)</key>
+  <key name="log_stop_running_for_flying">Déplacement arrêté pour décoller</key>
+  <key name="log_flying">Décollage</key>
+  <key name="log_continued_running">En cours d'exécution</key>
+  <key name="log_landing">Attérissage</key>
+  <key name="log_stuck1">Je suis coincé ! Appuie sur les touches 0 à 9. Rotation de la caméra de 110 degrés</key>
+  <key name="log_stuck2">ERREUR: Route interrompue en raison d'un blocage de plus de {0} secondes à un moment donné</key>
+  <key name="log_stuck3">ERREUR: Route interrompue en raison d'un blocage plus de {0} secondes</key>
+  <key name="log_stuck4">ERREUR: Route interrompue en raison d'un point de déplacement trop éloigné: {0} m</key>
+  <key name="log_waypoint_dead_success">Le trajet du retour à la vie s'est bien passé.</key>
+  <key name="log_waypoint_quest_success">La route de quête est un succès.</key>
+  <key name="log_waypoint_quest_moveto">Retour au NPC afin de valider la quête.</key>
+  <key name="log_waypoint_quest_success_2">Quete réussie.</key>
+  <key name="log_waypoint_quest_take">Prendre la quête.</key>
+  <key name="log_waypoint_quest_pass">Valider la quête.</key>
+  <key name="log_waypoint_quest_pass_fail">[!] Erreur de sélection du NPC! Echec de la quête.</key>
+  <key name="log_waypoint_quest_kill_all">Tué suffisament de monstre jusqu'à la fi nde route.</key>
+  <key name="log_waypoint_wait_after_end">Attente {0} second</key>
+  <key name="log_begin_new_motion">Démarrer un nouveau cycle de déplacement</key>
+  <key name="log_begin_record_waypoints">Début d'enregistrement de la route "{0}"</key>
+  <key name="alert_record_waypoints">Enregistrement de la route...
+{0} waypoint</key>
+  <key name="log_record_waypoints_success">Enregistrement de la route complèté</key>
+  <key name="log_error_record_waypoints_success">Erreur d'écriture itinéraire! Assurez-vous que le programme a le droit de créer des fichiers / d'écriture.</key>
+  <key name="log_error_load_options1">Erreur de chargement des paramètres basiques du logiciel: [{0}] {1}</key>
+  <key name="log_error_load_options2">Erreur de chargement des paramètres basiques. code 1. {0}</key>
+  <key name="log_load_options_success">Chargement des paramètres basiques du programme...</key>
+  <key name="log_load_options_not_found_file">Fichier des paramètres basique introuvable...</key>
+  <key name="log_error_load_profile1">Erreur de chargement de profile: {0}</key>
+  <key name="log_error_load_profile2">Erreur de chargement de Global.profile. code 1. {0}</key>
+  <key name="log_load_profile_success">Chargement du profile {0}</key>
+  <key name="log_load_profile_not_found_file">Fichier de profile introuvable...</key>
+  <key name="log_find_player">Tentative pour trouver un joueur</key>
+  <key name="mes_durak_header">Protection against inadvertent</key>
+  <key name="mes_durak1_text">Vérifiez les paramètres de sélection de cible.</key>
+  <key name="mes_durak2_text">Vérifiez les paramètres Attaque - Etat - Récupération
+Même si vous activez le mode de collecte des ressources,
+le bot doit attaquer les "objectifs" agressifs.</key>
+  <key name="mes_durak3_text">Vérifiez les paramètres pour la collecte de ressources.
+Nommé si le bouton de la macro à la collection.</key>
+  <key name="mes_durak4_text">louer vérifier vos circonstances de paramètres.
+Doivent être affectés au moins une condition.</key>
+  <key name="mes_error_access_bd">Erreur: Impossible d'accéder à la base de données. La poursuite des travaux est impossible.</key>
+  <key name="mes_durak5_text">Route non sélectionnée.
+Pour exécuter le bot sur ​​la route, vous devez sélectionner la route.
+Cliquez sur l'onglet Avancé et choisissez la route pour déplacer le robot.</key>
+  <key name="log_query_run_bot">Démarrer la demande...</key>
+  <key name="log_query_run_bot_fail">Démarrage de la demande impossible!</key>
+  <key name="log_query_stop_bot">Demande d'arret...</key>
+  <key name="log_query_stop_bot_success">Bot arrêté!</key>
+  <key name="caser_buff">Buff</key>
+  <key name="caser_HP_player">HP (soi-même)</key>
+  <key name="caser_MP_player">MP (soi-même)</key>
+  <key name="caser_HP_target">HP (cible)</key>
+  <key name="caser_HP_pet">HP du familier (le sien)</key>
+  <key name="caser_DP_player">DP (soi-même)</key>
+  <key name="caser_fly_time">Temps de vol (soi-même)</key>
+  <key name="caser_distance">Distance de la cible</key>
+  <key name="log_caser_error1">Erreur de traitement des conditions</key>
+  <key name="log_caser_error2">Execution des erreurs de conditions</key>
+  <key name="log_error_combo1">Erreur d'utilisation d'enchainement de sort. code 1. {0}</key>
+  <key name="log_error_combo2">Erreur d'utilisation d'enchainement de sort. code 2. {0}</key>
+  <key name="skill_if_hp">HP (soi-même)</key>
+  <key name="skill_if_mp">MP (soi-même)</key>
+  <key name="skill_if_dp">DP (soi-même - ED)</key>
+  <key name="skill_if_distance_to_target">Distance de la cible</key>
+  <key name="skill_if_hp_target">HP (cible)</key>
+  <key name="skill_if_hp_pet">HP du familier (le sien)</key>
+  <key name="skill_if_hp_pet_not_found">SM, sans familier</key>
+  <key name="skill_if_fly_time">Temps de vol</key>
+  <key name="skill_if_buff">Buff</key>
+  <key name="skill_if_debuff">Supprimer debuff</key>
+  <key name="skill_if_mantra">Mantra</key>
+  <key name="skill_if_pause">+ pause</key>
+  <key name="skill_if_cooldown">+ temps de recharge</key>
+  <key name="log_error_use_skills_order_by">Erreur d'utilisation du sort (ordre). {0}</key>
+  <key name="log_error_use_skills">Erreur d'utilisation du sort.</key>
+  <key name="log_error_regen_start">Panne au démarrage du bot: Paramètres invalides.</key>
+  <key name="log_regen_start">Regénération: HP / MP...</key>
+  <key name="log_regen_check">Vérification de la regénération...</key>
+  <key name="log_regen_secondary_set">Repos (Assis)</key>
+  <key name="log_regen_attack">Interruption de la regénération, personnage attaqué "{0}"</key>
+  <key name="log_regen_stop">Regénération complète</key>
+  <key name="log_looting">Ramassage de {0} ({1})</key>
+  <key name="log_looting_success">Ramassage réussi.</key>
+  <key name="log_looting_antiz">Antifreeze quand ramassage...</key>
+  <key name="log_error_looting">Erreur de sélection d'objet. {0}</key>
+  <key name="log_attack_mode">Mode Attaque Activé</key>
+  <key name="log_attack_mode_begin">Démarrage de l'attaque</key>
+  <key name="log_attack_mode_max_time">Le temps maximum de dégât venant de la cible "{0}" a été...</key>
+  <key name="log_attack_mode_begin_main">Lancement du cycle principal d'attaque...</key>
+  <key name="log_main_closing_stop_bot">Avant de clore la suspension de l'activité de la bot.</key>
+  <key name="log_main_closing_stop_radar">Avant de fermer le Radar.</key>
+  <key name="mes_error_select_window1">Impossible de se connecter au jeu</key>
+  <key name="mes_error_select_window2">Ne trouve pas la fenêtre de jeu</key>
+  <key name="log_error_sound_playing">Erreur de son: {0}</key>
+  <key name="log_template_client">Client template: {0}</key>
+  <key name="mes_error_init_combo">Impossible d'initialisé l'enchainement: </key>
+  <key name="mes_error_init_hotbar">Erreur d'initialisation des raccourcis: </key>
+  <key name="mes_error_init_skills">Erreur d'initialisation des sorts: </key>
+  <key name="mes_error_init_client">Initialisation échouée: {0} L{1}.
+Vérifier d'avoir sélectionné la bonne version du client.</key>
+  <key name="mes_error_init_scan">Erreur d'initialisation du scan...</key>
+  <key name="mes_radar_add_load_cpu">Le radar ajoute essentiellement de la charge au processeur.
+Etes-vous sûr de vouloir l'utiliser?
+
+Afin de minimiser l'augmentation de la charge du CPU, le taux de rafraichissement du radar sera augmenté.</key>
+  <key name="mes_sound_enemy">Cette option va ajouter de la charge de manière significative sur le processeur.
+Etes-vous sûr de vouloir l'utiliser?</key>
+  <key name="mes_attention">Attention!</key>
+  <key name="log_waypoint_rec_pause">Enregistrement de route mit en pause</key>
+  <key name="log_waypoint_rec_resume">Reprise de l'enregistrement de la route</key>
+  <key name="log_bot_pause">Bot mit en pause</key>
+  <key name="log_bot_resume">Reprise de l'activité du bot</key>
+  <key name="CaseForm_header_add_condition">Ajout de condition...</key>
+  <key name="CaseForm_b_add">Ajouter</key>
+  <key name="CaseForm_l_condition">Liste des conditions</key>
+  <key name="CaseForm_l_value">Valeur</key>
+  <key name="CaseForm_l_time">Temps</key>
+  <key name="CaseForm_l_button">Bouton</key>
+  <key name="log_error_caseform_add">Ajouter une erreur de conditions</key>
+  <key name="CaseForm_header_change_condition">Changer la condition...</key>
+  <key name="CaseForm_b_change">Changer</key>
+  <key name="log_error_caseform_change">Erreur du changement de conditions</key>
+  <key name="mes_way_rec_small_name">Vous devez renseigner le nom de la nouvelle route à enregistrée, vous devez saisir au moins 1 caractère</key>
+  <key name="mes_way_rec_rewrite">L'ancienne route "{0}"
+sera remplacée par la route en cours d'enregistrement!
+
+Etes-vous sûr de vouloir l'écraser ?</key>
+  <key name="mes_way_rec_rewrite_header">Route portant le même nom existe déjà</key>
+  <key name="log_error_selecting_target1">Erreur de sélection de la cible. Code 1: {0}</key>
+  <key name="log_error_selecting_target_fail">Impossible de choisir: {0} [d = {1}m]</key>
+  <key name="log_error_selecting_target2">Erreur de sélection de la cible. Code 2: {0}</key>
+  <key name="log_start_bot">[!] Mise en route du Bot</key>
+  <key name="log_bot_mode">Mode: {0}</key>
+  <key name="mes_check_options_gart">Vérifiez les paramètres de collecte des ressources</key>
+  <key name="log_bot_waypoints">Route: {0}</key>
+  <key name="log_find_lootable">Cadavre sans surveillance trouvé "{0}"</key>
+  <key name="log_find_target">Cible: {0} ({1})</key>
+  <key name="log_attack_error">Attaque échouée: {0}</key>
+  <key name="log_find_res">Ressource trouvée: {0}</key>
+  <key name="log_find_res_near_player">Prochaine ressource déjà occupée "{0}" d={1}. Passe au suivant...</key>
+  <key name="log_find_res_gart_selecting">Ressource sélectionnée : "{0}" d={1}</key>
+  <key name="log_find_res_gart">Collecte de la resource...</key>
+  <key name="log_find_res_gart_error_selecting">Echec. La ressource n'est pas sélectionnée...</key>
+  <key name="log_find_res_timeout">Temps de recherche de collecte écoulé!</key>
+  <key name="log_error_gart">Bug de collecte: {0}</key>
+  <key name="log_error_bot_mode_conditions">Erreur du mode conditions: {0}</key>
+  <key name="log_error_bot_mode_conditions_attack">Impossible d'activer le mode "attaque + conditions": {0}</key>
+  <key name="log_pause_if_friendly">Arrêt pour une pause prêt d'un allié "{0}" d={1}.</key>
+  <key name="log_pause_if_friendly_add_ignore">Temps de pause maximum expiré. "{0}" est ajouté à la liste des ignorés.</key>
+  <key name="log_pause_attack">Cycle d'attaque mit en pause.</key>
+  <key name="log_pause_if_friendly_left">Retour à la chasse. L'ami vient de quitter le territoire.</key>
+  <key name="log_exit_if_first_dead">Fermeture du jeu... [Paramètre de fermeture du jeu immédiate après la première mort]</key>
+  <key name="log_bot_stop">[!] Arrêt du Bot</key>
+  <key name="log_attack_end">Sélection de la cible à attaqué (Réussi).</key>
+  <key name="log_pause_after_attack">Pause automatique après avoir tué un monstre</key>
+  <key name="statistic_mini">Statistiques
+Tué: {0}
++Exp: {1}
+Exp/min: {2}
+Prochain niveau: {3}</key>
+  <key name="AddForm_add_header">Ajouter à la liste...</key>
+  <key name="AddForm_add_button">Ajouter</key>
+  <key name="AddForm_change_header">Changer...</key>
+  <key name="AddForm_change_button">Changer</key>
+  <key name="AddForm_cancel_button">Annuler</key>
+  <key name="AddForm_l_content">Nom:</key>
+  <key name="AddForm_l_button">Bouton avec macro</key>
+  <key name="log_end_time_key">Temps de la clé expiré. Fermeture du programme.</key>
+  <key name="L_authorization">&lt;html&gt;&lt;strong&gt;Authorization:&lt;/strong&gt;&lt;br/&gt;Attempt № {0}&lt;/html&gt;</key>
+  <key name="mes_error_authorization">Erreur de connexion à l'authentification du serveur!
+Vérifiez si vous avez accès au site. Il est également possible que vous n'avez pas : Net Framework 3.5 SP1.</key>
+  <key name="log_error_authorization">Erreur d'autorisation: Impossible de se connecter au site d'autorisation</key>
+  <key name="log_error_authorization_time">Erreur d'autorisation: Un utilisateur connecté utilise déjà cette clé</key>
+  <key name="mes_error_authorization_time">Un utilisateur avec la clé donnée est déjà connecté.
+Ou la clé est invalide / expirée.
+
+Si vous êtes l'unique propriétaire de cette clé et confiant
+qu'elle n'est pas utilisée ailleurs, alors attendez quelques minuts et recommencé.
+Redémarrer votre machine si la précédente étape n'a pas fonctionné.
+
+Pour tout renseignement rendez-vous sur http://www.rubot-aion.com/.</key>
+  <key name="mes_error_authorization_time_header">Erreur d'autorisation - Temps écoulé (Header)</key>
+  <key name="log_error_authorization1">Erreur d'autorisation: Code 1. {0}</key>
+  <key name="log_error_save_license_file">Erreur: Sauvegarde de la clé dans le fichier.</key>
+  <key name="account_time_normal">Cette clé est active jusqu'au {0}</key>
+  <key name="L_nick_logged">&lt;html&gt;Votre pseudo: &lt;strong&gt;{0}&lt;/strong&gt;&lt;/html&gt;</key>
+  <key name="L_wellcome_logged">&lt;html&gt;&lt;strong&gt;Bienvenue,&lt;/strong&gt;&lt;br/&gt;{0}&lt;/html&gt;</key>
+  <key name="log_logged">Authentification réussi, connecté - "{0}"</key>
+  <key name="log_logged_fail">Authentification échouée. Fermeture. ({0} | {1} | {2} | {3})</key>
+  <key name="log_error_radar_open">Erreur lors de l'ouverture du radar: {0}</key>
+  <key name="log_error_radar_close">Erreur lors de la fermeture du radar: {0}</key>
+  <key name="log_error_radar">Erreur radar: {0}</key>
+  <key name="log_error_definition_running">Impossible de déterminer l'état {0}</key>
+  <key name="log_error_fill_list_combo">Impossible de remplir le combo utilisé... {0}</key>
+  <key name="log_error_chat">Erreur de Chat: {0}</key>
+  <key name="log_error_chat_pause">Erreur de pause du chat: {0}</key>
+  <key name="log_error_chat_send">Erreur d'envoi de message dans le chat. {0}</key>
+  <key name="log_error_skill_move_up">Erreur lors du déplacement du sort (montant). {0}</key>
+  <key name="log_error_skill_move_down">Erreur lors du déplacement du sort (descendant). {0}</key>
+  <key name="log_erorr_change_ghotkey">Erreur: Impossible de changer un raccourcis global. {0}</key>
+  <key name="mes_erorr_change_ghotkey">Bouton {0}, occupé!
+Il ne peut être utilisé comme un raccourcis global !</key>
+  <key name="log_run_craft">Lancement de l'artisanat.</key>
+  <key name="log_run_master_craft">Formation d'apprentissage de l'artisanat.</key>
+  <key name="L_craftwizzard_step">Etape {0}</key>
+  <key name="L_craftwizzard_header">Configuration de la formation de l'artisanat</key>
+  <key name="L_craftwizzard_2">2. Click sur {0}</key>
+  <key name="L_craftwizzard_1_step1">1. Déplacez votre souris sur les boutons de commandes</key>
+  <key name="L_craftwizzard_1_step2">1. Déplacez votre souris sur la commande du haut</key>
+  <key name="L_craftwizzard_1_step3">1. Déplacez votre souris sur le bouton d'accord</key>
+  <key name="L_craftwizzard_1_step4">1. Exécutez table. Déplacez votre souris sur l'ordre dans la fenêtre de commande</key>
+  <key name="L_craftwizzard_1_step5">1. Déplacez votre curseur sur "Artisanat tout"</key>
+  <key name="L_craftwizzard_1_step6">1. Allez au maître de métier. Déplacez votre souris sur les boutons "commandes"</key>
+  <key name="L_craftwizzard_1_step7">1. Déplacez votre souris sur la commande du haut</key>
+  <key name="L_craftwizzard_1_step8">1. Déplacez votre souris sur "OK"</key>
+  <key name="L_craftwizzard_1_step9">1. Déplacez votre souris sur la fenêtre du haut "travail de commande"</key>
+  <key name="L_craftwizzard_1_step10">1. Déplacez votre souris sur le bouton Abandonner</key>
+  <key name="L_craftwizzard_1_step11">1. Déplacez votre souris sur le bouton OK dans la fenêtre de confirmation</key>
+  <key name="log_craftwizzard_done">Formation de l'assistant "Artisanat" terminée.</key>
+  <key name="log_craftworker_fail">Artisanat - {0} conception échouée... ({1})</key>
+  <key name="log_craftworker_fail_streak">Ligne {0} a échouée! - artisanat complété.</key>
+  <key name="log_error_craftworker">Erreur de artisanat: {0}</key>
+  <key name="log_craftworker_done">Artisanat - completé {0} cycle(s)</key>
+  <key name="log_exit_craftworker">Sortie du cycle d'artisanat.</key>
+  <key name="log_craftworker_done2">[Artisanat completé]</key>
+  <key name="log_error_save_craft">Impossible de sauvegarder le fichier, artisanat: {0}</key>
+  <key name="log_error_load_craft1">Erreur lors du chargement des paramètres de l'artisanat: [{0}] {1}</key>
+  <key name="log_load_craft_success">Chargement des paramètres de l'artisanat. Etape: {0}</key>
+  <key name="log_load_craft_not_found_file">Fichier de configuration de l'artisanat non trouvé...</key>
+  <key name="mes_way_not_selected_type">Aucun type de route sélectionné!</key>
+  <key name="L_questwizzard_step">Etape {0}</key>
+  <key name="log_run_master_quest">Le Tutoriel débute l'apprentissage.</key>
+  <key name="L_questwizzard_header">Le tutoriel configure la réception de quête</key>
+  <key name="L_questwizzard_2">2. Clic sur {0}</key>
+  <key name="L_questwizzard_1_step1">1. Bougez le curseur en dessous du titre</key>
+  <key name="L_questwizzard_1_step2">1. Déplacez le curseur sur le bouton Fermer. Où va le bouton Accepter</key>
+  <key name="log_questwizzard_done">Formation Maître quête terminée.</key>
+  <key name="log_error_save_quest">Erreur de sauvegarde de la quête dans le fichier: {0}</key>
+  <key name="log_error_load_quest1">Erreur de chargement des paramètres de quête: [{0}] {1}</key>
+  <key name="log_load_quest_success">Chargement des paramètres de quête. Etape: {0}</key>
+  <key name="log_load_quest_not_found_file">Fichier de configuration de quête non trouvé...</key>
+  <key name="log_kill_quest_mob">Monstre de quête: {0}</key>
+  <key name="L_way_select_normal">Normal:</key>
+  <key name="L_way_select_return">Retour:</key>
+  <key name="G_way_select_quest">Route de Quête</key>
+  <key name="L_way_select_quest">Quête:</key>
+  <key name="L_way_select_quest_num_mobs">Nombre de monstre pour réussir</key>
+  <key name="L_way_select_quest_names">Nom des monstres</key>
+  <key name="L_way_select_quest_name_NPC">Nom NPC</key>
+  <key name="L_way_select_quest_begin">Options</key>
+  <key name="B_way_select_quest_wizzard">Entraînement Dialogue PNJ</key>
+  <key name="C_way_select_quest_0">Prendre la quête</key>
+  <key name="C_way_select_quest_1">Aller au lieu d'attaque</key>
+  <key name="C_way_select_quest_2">Chasse débutée</key>
+  <key name="C_way_select_quest_3">Chasse terminée</key>
+  <key name="C_way_select_quest_4">Retour au PNJ</key>
+  <key name="C_way_select_quest_5">Valider la quête au NPC</key>
+  <key name="log_running_stopped">Arrêter.</key>
+  <key name="log_find_GM">[ ALERT ] Découverte d'un GM "{0}"</key>
+  <key name="log_find_GM_exit">[!] Fermeture du jeu => Détection d'un GM!</key>
+  <key name="way_none">[ néant ]</key>
+  <key name="log_exit_if_inventory_full">Inventaire plein. Quitter le jeu.</key>
+  <key name="log_exit_if_max_level">Niveau à atteindre avant de quitter le jeu.</key>
+  <key name="log_to_way_m">Proximité de la route: {0}m</key>
+  <key name="log_return_start">Retour à l'obelisque et redémarrer le bot</key>
+  <key name="log_return_wait_coldown">En attendant la compétence "Retour"</key>
+  <key name="log_return_use">Utiliser le sort "Retour"</key>
+  <key name="log_return_wait_teleport">Attendre la téléportation</key>
+  <key name="log_return_wait_find_player">Attente supplémentaire - recherche du personnage</key>
+  <key name="log_return_fail">Erreur de retour</key>
+  <key name="log_return_restart_now">Redémarrer le bot sur la route de retour</key>
+  <key name="log_return_error">Erreur de retoun {0}</key>
+  <key name="log_waypoints_nav_error">Échec du trafic sur la route {0}</key>
+  <key name="log_attack_cases_error">Échec des conditions d'attaque {0}</key>
+  <key name="log_attack_worker_attack_error">Erreur dans la partie Attaque {0}</key>
+  <key name="log_main_cicle_error">Erreur dans la boucle principale {0}</key>
+  <key name="C_gart_use_potion">Potion</key>
+  <key name="L_gart_use_potion_if">à &lt;</key>
+  <key name="L_gart_use_potion_cooldown">recharge</key>
+  <key name="log_return_sendkey">Erreur d'envoi de clés.</key>
+  <key name="C_atk_select_target_from_chat">Choix de la cible par commande chat</key>
+  <key name="Mes_expires_use">L'utilisation à long terme du programme expire dans {0} jours.
+Pour le renouvellement de l'abonnement aller sur le site rubotaion.ru dans "Mes clés".
+Accéder au site?</key>
+  <key name="log_find_enemy_exit">[!] Quitter le jeu lors de la détection de joueur de race opposée!</key>
+  <key name="TT_tab_info">Info / Démarrer</key>
+  <key name="TT_tab_attack">Attaque</key>
+  <key name="TT_tab_gart">Récolte</key>
+  <key name="TT_tab_radar">Radar</key>
+  <key name="TT_tab_waypoints">Routes</key>
+  <key name="TT_tab_craft">Artisanat</key>
+  <key name="TT_tab_alerts">Alertes</key>
+  <key name="TT_tab_options">Options Basiques</key>
+  <key name="TT_tab_find">Trouver Jeu</key>
+  <key name="TT_tab_about">Info</key>
+  <key name="RADAR_battle_target">Cible: {0} [{1}] {2}/{3}</key>
+  <key name="RADAR_battle_target_not_selected">Cible pas sélectionnée</key>
+  <key name="RADAR_battle_friendly">Ami: {0} </key>
+  <key name="RADAR_battle_friendly_not_found">Pas ami</key>
+  <key name="RADAR_battle_enemy20+">Ennemi:  {0} [{1} - {2}]</key>
+  <key name="RADAR_battle_enemy_not_found">Pas Ennemi</key>
+  <key name="C_opt_base_remind_expiration">Rappel de l'expiration de la clé</key>
+  <key name="Mes_error_craft_button_select_npc">Non affecté à un bouton de macro (à créer) puis parler avec le PNJ</key>
+  <key name="Mes_trial">Vous utilisez la version d'essai.
+Ce message apparaît toutes les 8 minutes.
+Dans ce mode, certaines fonctions du bot ne sont pas disponible.</key>
+  <key name="Mes_trial_expires">Cette clé d'essai n'est plus valide.</key>
+  <key name="C_way_type_0">Normal</key>
+  <key name="C_way_type_1">Retour après la mort</key>
+  <key name="C_way_type_2">Quête de pièces</key>
+  <key name="RAD_class0">Guerrier</key>
+  <key name="RAD_class1">Gladiateur</key>
+  <key name="RAD_class2">Templier</key>
+  <key name="RAD_class3">Eclaireur</key>
+  <key name="RAD_class4">Assassin</key>
+  <key name="RAD_class5">Rôdeur</key>
+  <key name="RAD_class6">Mage</key>
+  <key name="RAD_class7">Sorcier</key>
+  <key name="RAD_class8">Spiritualiste</key>
+  <key name="RAD_class9">Prêtre</key>
+  <key name="RAD_class10">Clerc</key>
+  <key name="RAD_class11">Aède</key>
+  <key name="RAD_class12">Ingénieur</key>
+  <key name="RAD_class14">Pistolero</key>
+  <key name="RAD_class15">Artiste</key>
+  <key name="RAD_class16">Barde</key>
+  <key name="C_opt_base_to_tray">Minimiser l'application dans la barre système (côté de l'horloge)</key>
+  <key name="B_pause">Pause</key>
+  <key name="log_cancel_exit_game_lvl">[!] Annuler l'événement en dehors du jeu lorsque le joueur atteint le niveau</key>
+  <key name="TT_tab_stats">Statistiques</key>
+  <key name="L_stats_header">Statistiques</key>
+  <key name="L_stats_inventory">Inventaire</key>
+  <key name="L_stats_kinah">Kinah</key>
+  <key name="L_stats_auk">Total vendu (HdV)</key>
+  <key name="L_stats_ubito">Tué</key>
+  <key name="L_stats_sobrano">Collecté</key>
+  <key name="L_stats_exp_plus">Expérience</key>
+  <key name="L_stats_exp_min">Exp / min</key>
+  <key name="L_stats_to_lvl">Reste</key>
+  <key name="L_stats_time_start">Temps d'exécution</key>
+  <key name="N_atk_sk_heal_skills">Soin</key>
+  <key name="N_atk_sk_mantra_skills">Mantras</key>
+  <key name="N_atk_sk_heal_skills_desc">Sort de soin, vérifie la condition de HP entre chaque sort.
+Pour chaque sort de soin vous devez ajouter une condition de HP.</key>
+  <key name="N_atk_sk_mantra_skills_desc">Les mantras sont utilisées pour tout les modes d'execution du bot.
+Un ajout de paramètre de condition n'est pas nécessaire.</key>
+  <key name="L_opt_sound_distance">à distance de</key>
+  <key name="L_opt_sound_activate_window">Jeu activé</key>
+  <key name="TAB_opt_sound_major">Majeur</key>
+  <key name="TAB_opt_sound_standart">Standard</key>
+  <key name="L_stats_deaths">Morts</key>
+  <key name="L_stats_ubito_min">Tué / min</key>
+  <key name="L_stats_sobrano_min">Collecté / min</key>
+  <key name="log_exit_if_pm">Ferme le jeu - reçu PM</key>
+  <key name="log_caser_error3">Erreur de condition. touche {0}.</key>
+  <key name="log_do_skills_after_dead">Execution des sorts après la résurrection.</key>
+  <key name="N_atk_sk_after_dead">Après la mort</key>
+  <key name="N_atk_sk_after_dead_desc">Sorts utilisés une fois mort à l'obélisque.</key>
+  <key name="TIP_atk_sk_available">Bouton</key>
+  <key name="log_do_skills_before_start_bot">Exécution des compétences avant de lancer le bot.</key>
+  <key name="N_atk_sk_before_start_bot">Avant de démarrer le bot</key>
+  <key name="N_atk_sk_before_start_bot_desc">Sort utilisé lorsque l'on démarre le bot.</key>
+  <key name="log_trial_max_level">[!] Rubot ne fonctionne que sur les personnage de niveau {0} ou inférieur.</key>
+  <key name="skill_if_companion">Familier</key>
+  <key name="log_looting_uni_success">Ramassage d'objet unique réussi.</key>
+  <key name="L_stats_channel">Canal</key>
+  <key name="C_atk_ad_looting_uni">Ramasser les objets qui demandent une validation (unique)</key>
+  <key name="log_new_path">Chemin vers les fichiers bot: "{0}"</key>
+  <key name="log_new_waypoints">Chemin des routes: "{0}"</key>
+  <key name="log_waypoint_reverse">Routes inversées</key>
+  <key name="C_opt_profile_save">Sauvegarder le profile à l'arrêt du bot</key>
+  <key name="C_opt_base_updates">Vérifier les mises à jour du bot</key>
+  <key name="C_atk_max_battle_time">Temps max de durée de combat</key>
+  <key name="L_atk_max_ignore_time">Temps max avant d'ignorer la cible</key>
+  <key name="Desc_atk_max_ignore_time">Afin d'ignorer une cible.
+Si le bot n'arrive pas à sélectionner une cible dans les {0} secondes ou en attendant de re-passer en cycle de combat.</key>
+  <key name="log_attack_mode_max_battle_time">Temps maximum de combat sur {0} expiré.</key>
+  <key name="C_opt_halt">Eteindre l'ordinateur</key>
+  <key name="C_atk_ad_target_player">Attaquer les joueurs de même race (Attaque + conditions)</key>
+  <key name="log_select_window">Selection de la fenêtre: {0}</key>
+  <key name="log_new_window">Argument de la fenêtre: {0}</key>
+  <key name="log_new_profiles">Chemin des profiles: {0}</key>
+  <key name="log_new_sounds">Chemin des sons: {0}</key>
+  <key name="log_new_data">Chemin des autres fichiers: {0}</key>
+  <key name="G_opt_after_exit_game">Evênement pour quitter le jeu</key>
+  <key name="C_opt_kill_process">Fermer le processus</key>
+  <key name="C_opt_use_return_after_exit_game">Sort "Retour"</key>
+  <key name="log_teleport">! TELEPORTATION  !</key>
+  <key name="log_cancel_user_res">Résurrection annulée.</key>
+  <key name="log_new_log_path">Chemin des logs: {0}</key>
+  <key name="GL_Yes">Oui</key>
+  <key name="GL_No">Non</key>
+  <key name="P_cat_main">Important</key>
+  <key name="P_cat_basic">Standard</key>
+  <key name="P_enable">Activé</key>
+  <key name="P_disable">Off</key>
+  <key name="P_enable_desc">Traiter cet événement</key>
+  <key name="P_sound">Jouer le son</key>
+  <key name="P_sound_desc">Jouer un son lors d'un évènement</key>
+  <key name="P_activate_window">Fenêtre définie</key>
+  <key name="P_activate_window_desc">La fenêtre est définie et s'affiche au premier plan</key>
+  <key name="P_exit_game">Sortir du jeu</key>
+  <key name="P_exit_game_desc">Sortir du jeu lors de cet événement</key>
+  <key name="P_twitter">Twitter</key>
+  <key name="P_twitter_desc">Envoyer un message à propos de l'événement sur ​​twitter</key>
+  <key name="P_exec_script">Script</key>
+  <key name="P_exec_script_desc">Exécution d'un fichier externe dans l'évènement</key>
+  <key name="P_dist">Distance</key>
+  <key name="P_dist_desc">A distance du personnage</key>
+  <key name="P_additional">Compléments</key>
+  <key name="P_additional_desc">Préférences avancées</key>
+  <key name="P_alert_run_bot">Démarrer le bot</key>
+  <key name="P_alert_run_bot_desc">Événement lors de la mise en marche du bot</key>
+  <key name="P_alert_stop">Arrêt du bot</key>
+  <key name="P_alert_stop_desc">Événement lors de l'arrêt du bot</key>
+  <key name="P_alert_pause_enable">Mise en pause du bot</key>
+  <key name="P_alert_pause_enable_desc">Événement lors de la mise en pause du bot</key>
+  <key name="P_alert_pause_disable">Retrait d'une pause</key>
+  <key name="P_alert_pause_disable_desc">Événement lors du retrait de la pause du bot</key>
+  <key name="P_alert_pm">Privé</key>
+  <key name="P_alert_pm_desc">Événement à la réception d'un message privé</key>
+  <key name="P_alert_dead_bot">Mort du personnage</key>
+  <key name="P_alert_dead_bot_desc">Événement à la mort du personnage</key>
+  <key name="P_alert_inventory_full">Inventaire</key>
+  <key name="P_alert_inventory_full_desc">Événement d'inventaire plein</key>
+  <key name="P_alert_enemy">Ennemi</key>
+  <key name="P_alert_enemy_desc">Événement à l'apparition d'un certain nombre de joueur de race opposée</key>
+  <key name="P_alert_friendly">Ami</key>
+  <key name="P_alert_friendly_desc">Événement à l'apparition d'un certain nombre de joueurs de sa race</key>
+  <key name="P_alert_gm">GM</key>
+  <key name="P_alert_gm_desc">Événement à l'apparition de près de GM</key>
+  <key name="P_alert_level">Niveau du joueur</key>
+  <key name="P_alert_level_desc">Evènement quand le joueur prend un niveau</key>
+  <key name="P_alert_level2">Niveau</key>
+  <key name="P_alert_level2_desc">Niveau du joueur + pourcentage d'expérience (pour exemple 15.95 - est 15 + 95% du niveau d'expérience)</key>
+  <key name="P_and_write_chat">+ Texte blanc de dialogue</key>
+  <key name="P_and_write_chat_desc">Ajoute les enregistrements du texte blanc de dialogue</key>
+  <key name="P_write_to_file_boll">Dans le fichier</key>
+  <key name="P_write_to_file_boll_desc">Enregistre tout les messages dans le fichier</key>
+  <key name="P_write_to_file">Chemin du fichier</key>
+  <key name="P_write_to_file_desc">Dans ce dossier est stocké le fichier de dialogue</key>
+  <key name="C_way_add_way_reverse">Faire la route en sens inverse (normale)
+Si les points de début et de fin sont trop espacés</key>
+  <key name="TAB_opt_sound_teleport">Teleportation</key>
+  <key name="С_opt_sound_stop">Arrêter le bot</key>
+  <key name="С_opt_sound_pause">En pause durant</key>
+  <key name="С_opt_sound_message">Texte</key>
+  <key name="L_opt_sound_repeat">répéter après</key>
+  <key name="GL_times">fois</key>
+  <key name="L_opt_sound_restart">Redémarrer la route si il est à proximiter</key>
+  <key name="L_opt_sound_restart_mobs">Redémarrer sans route, si le niveau des monstres sont</key>
+  <key name="GL_from">de</key>
+  <key name="GL_to">à</key>
+  <key name="TAB_opt_sound_pm">Répondre aux PM</key>
+  <key name="С_opt_sound_pm_answer">Répondre aux PM</key>
+  <key name="skill_if_cooldown_id">Recharge du sort</key>
+  <key name="C_opt_base_write_stats">Ecrire dans le fichier</key>
+  <key name="C_atk_combo_ex">Enchainements avancés</key>
+  <key name="C_atk_ad_not_attack_enemy_players">Ne pas attaquer les joueurs de la faction adverse</key>
+  <key name="J_send_help">Commandes non reconnue.
+Référence de commandes.
+/info  /i  - sommaire des statistiques.
+/player /p - sommaire des status du joueur.
+/chat      - Les 20 dernières lignes du canal Général.
+/chatall   - Les 500 dernières lignes du canal Général.
+/pm        - Tout les messages privés.
+/mess /m   - Envoyer un message dans le canal.
+/target /t - Sélectionne la cible du personnage.
+/ver       - version du bot.
+/time      - a key deadline.
+/start     - démarrer le bot.
+/stop      - arrêt du bot.
+/mode      - change le mode de bot. Pour exemple '/mode 0' - Attaque Auto., '/mode 1' - Collecte de ressources.
+/options   - Affiche le fichier de téléchargement des paramètres : obshih.
+/profiles  - Affiche le fichier de téléchargement des profiles.
+/cmd       - Lancement de programmes extérieurs au bot. Pour exemple '/cmd calc'.
+/dconnect  - bot déconnecté par xmpp (jabber).
+/exit      - Arrêt rapide du bot. Le jeu n'est pas fermé.
+/quit      - Arrêt rapide du bot. Le jeu est fermé.
+  </key>
+  <key name="G_way_add_resume">Après une pause, se déplacer</key>
+  <key name="R_way_add_resume_next_5">au point des cinq points suivants optimales</key>
+  <key name="R_way_add_resume_near">au point de la route la plus proche</key>
+  <key name="C_opt_keys_plyer_action_enable">Utilisation minimale des boutons</key>
+  <key name="skill_if_repeat_n">Répéter (sort multi-coups)</key>
+  <key name="skill_if_2_mobs">2 monstres attaqués</key>
+  <key name="C_way_add_way_regen">Se reposer uniquement sur la route</key>
+  <key name="C_bot_mode_script">Script</key>
+  <key name="log_start_script">Démarrer le script "{0}"</key>
+  <key name="log_start_script_void">Démarrer la function "{0}"</key>
+  <key name="log_start_script_void_end">Fin de la function "{0}"</key>
+  <key name="log_start_script_var_changed">Variable {0} = {1}</key>
+  <key name="log_new_scripts">Chemin du dossier contenant le script: "{0}"</key>
+  <key name="mes_script_exit_loop">Sortir de ce cycle?</key>
+  <key name="mes_script_exit_script">Aide sur le script?</key>
+  <key name="mes_script_error_usl_int">Erreur. manque operateur +, -, * or /</key>
+  <key name="mes_script_error_usl_str">Erreur. manque operateur +</key>
+  <key name="mes_script_error_variable">Erreur. variable inconnue</key>
+  <key name="mes_script_error_variable_text">Variable inconnue: "{0}"</key>
+  <key name="mes_script_error_usl_text">Besoin d'un operateur: "{0}"</key>
+  <key name="mes_script_error_line">Ligne</key>
+  <key name="mes_script_error_1">Variable "{0}" déjà été initialisée</key>
+  <key name="mes_script_error_2">Manque d'operateur</key>
+  <key name="mes_script_error_3">Identificateur ou variable inconnue "{0}"</key>
+  <key name="mes_script_error_4">Propriété ou méthode inconnue "{0}"</key>
+  <key name="mes_script_error_5">Fichier de route "{0}" non trouvé</key>
+  <key name="mes_script_error_6">Fichier de route "{0}" est endommagé</key>
+  <key name="mes_script_error_7">Erreur d'ajout "{0}" fonction</key>
+  <key name="mes_script_error_8">Fichier "{0}" non existant</key>
+  <key name="mes_script_error_9">Manque de variables dans la fonction "{0}"</key>
+  <key name="mes_script_error_10">Dans la boucle "FOR", utilise déjà une variable "{0}"</key>
+  <key name="mes_script_error_11">Dans un tableau, manque d'indice "{0}"</key>
+  <key name="C_atk_next_agro">Attaquer les monstres aggressifs avant qu'ils ne vous attaque</key>
+  <key name="skill_if_stage_time">Stage Time</key>
+  <key name="skill_if_level">Niveau du joueur</key>
+  <key name="B_change_script">Edition du Script</key>
+  <key name="mes_changeed_script_header">Script a été changé</key>
+  <key name="mes_changeed_script_text">Sauvegarder les changements?</key>
+  <key name="log_use_flypotition_in_gart">Utiliser une potion en vol</key>
+  <key name="log_captcha_detected">CAPTCHA détecté...</key>
+  <key name="log_captcha_try_ans">Suggéré de: {0}</key>
+  <key name="log_captcha_err_ans">Erreur. CAPTCHA erroné</key>
+  <key name="skill_if_name_contains">Contenant le nom (nom de la cible)</key>
+  <key name="C_opt_base_activation_2">Activer jeu 2.0</key>
+  <key name="log_waypoint_quest_take_fail">Erreur! NPC {0} non trouvé.</key>
+  <key name="mes_script_error_12">Étiquette goto pas trouvé "{0}"</key>
+  <key name="C_way_anti_return_in_script">Utilise le "Retour" en mode script</key>
+  <key name="log_player_trageting">Vous avez ciblé un joueur "{0}".</key>
+  <key name="C_way_add_wait_dabuff">Après le retour à la vie, attendre la fin du debuff de mort</key>
+  <key name="L_atk_st_target_h">Hauteur:</key>
+  <key name="C_atk_skills_autoupd">Automatique mettre à jour les sorts</key>
+  <key name="N_atk_sk_always">Toujours en utilisant</key>
+  <key name="N_atk_sk_always_desc">Les compétences sont toujours utilisées indépendamment du mode. Il est recommandé d'ajouter certaines conditions.</key>
+</lang>

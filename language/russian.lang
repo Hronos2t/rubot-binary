@@ -1,0 +1,842 @@
+﻿<lang>
+  <key name="L_no_target">Нет цели</key>
+  <key name="L_bot_mode">Режим бота</key>
+  <key name="C_bot_mode_auto_attack">Авто атака</key>
+  <key name="C_bot_mode_garter">Сбор ресурсов</key>
+  <key name="C_bot_mode_attack_on_target">Атака по цели</key>
+  <key name="C_bot_mode_quest">Квест</key>
+  <key name="C_use_waypoints">По маршруту</key>
+  <key name="C_dead_waypoints">Начать
+с возвращения</key>
+  <key name="L_mini_statistics">Статистика</key>
+  <key name="B_start">Запуск</key>
+  <key name="B_stop">Остановить</key>
+  <key name="B_search_player">Поиск игрока</key>
+  <key name="L_coordinates_player">Координаты</key>
+  <key name="L_coordinates_player_run">Движется</key>
+  <key name="L_coordinates_player_stop">Стоит</key>
+  <key name="L_target_no_gart">Мал уровень сбора</key>
+  <key name="L_target_gart">Можно собрать</key>
+  <key name="L_atk_header">Атака</key>
+  <key name="TAB_atk_select_target">Выбор цели</key>
+  <key name="L_atk_st_dist_player">Расстояние от персонажа:</key>
+  <key name="L_atk_st_dist_waypoint">Радиус от начальной точки:</key>
+  <key name="L_atk_st_target_lvl">Уровень цели:</key>
+  <key name="L_atk_st_target_is">Цель должна быть:</key>
+  <key name="C_atk_st_target_agro">Агрессивной</key>
+  <key name="C_atk_st_target_passive">Пассивной</key>
+  <key name="C_atk_st_name_contains">Название содержит:*</key>
+  <key name="C_atk_st_name_no_contains">Название исключает:*</key>
+  <key name="Desc_atk_st_name_contains">* несколько названий можно написать через запятую</key>
+  <key name="C_atk_st_not_choose_any">Не выбирать чужих мобов</key>
+  <key name="C_atk_st_skip_if_not_attack">Пропускать, если невозможно атаковать</key>
+  <key name="GL_sec">сек</key>
+  <key name="GL_min">мин</key>
+  <key name="GL_hour">ч</key>
+  <key name="Desc_atk_st">Важно! Если цель атакует Вас или Вашего суммона, 
+то она выбирается для атаки независимо от всех этих настроек</key>
+  <key name="TAB_atk_skills">Скиллы</key>
+  <key name="L_atk_sk_available">Доступные</key>
+  <key name="Desc_atk_sk_available">* х2 клик - добавить</key> 
+  <key name="B_atk_sk_skills_update">Обновить список</key> 
+  <key name="C_atk_sk_only_up_lvl">Высший уровень</key> 
+  <key name="L_atk_sk_tree_skills">Дерево скиллов</key>
+  <key name="N_atk_sk_before_attack">Перед атакой</key>
+  <key name="N_atk_sk_attacking_skills">Атакующие скиллы</key>
+  <key name="N_atk_sk_combo_skills">Цепочки комбо</key>
+  <key name="N_atk_sk_after_win">После убийства</key>
+  <key name="N_atk_sk_before_attack_desc">Используются перед основным циклом атаки
+и после выбора подходящей цели. Один раз.
+Желательно указывать баффы или дальние атакующие скиллы</key>
+  <key name="N_atk_sk_attacking_skills_desc">Основной атакующий цикл</key>
+  <key name="N_atk_sk_combo_skills_desc">Все комбо-скиллы, которые должен использовать персонаж</key>
+  <key name="N_atk_sk_after_win_desc">Действия после убийства очередной жертвы и лутания её</key>
+  <key name="Desc_atk_sk_tree_skills">* нажмите Delete чтобы удалить</key>
+  <key name="LC_atk_sk_conditions_skill">Условия для скилла</key>
+  <key name="LC_atk_sk_conditions_skill2">Условия для {0}</key>
+  <key name="Desc_atk_sk_conditions_skill">* Insert - добавить | Delete - удалить</key>
+  <key name="R_atk_sk_conditions_all">Все условия</key>
+  <key name="R_atk_sk_conditions_any">Любое условие</key>
+  <key name="TAB_atk_regen">Реген / воскрешение</key>
+  <key name="C_atk_use_but_regen">Для воскрешения нажимать на кнопку (сверху вниз):</key>
+  <key name="C_atk_but_regen_first">Первую</key>
+  <key name="C_atk_but_regen_last">Последнюю</key>
+  <key name="G_atk_co_conditions">Действия по условию (баффы / поты / хил)</key>
+  <key name="LC_atk_co_condition">Условие</key>
+  <key name="LC_atk_co_action">Действие</key>
+  <key name="Desc_atk_co_conditions">* Insert - добавить | Delete - удалить</key>
+  <key name="B_atk_co_test_conditions">Тест</key>
+  <key name="G_atk_co_regen">Восстановление HP и MP</key>
+  <key name="C_atk_co_hp_regen">Садиться при HP &lt;</key>
+  <key name="C_atk_co_mp_regen">Садиться при MP &lt;</key>
+  <key name="C_atk_co_hp_regen_to100">%  до 95%</key>
+  <key name="C_atk_co_mp_regen_to100">%  до 95%</key>
+  <key name="TAB_atk_additionally">Дополнительно</key>
+  <key name="C_atk_ad_skills_order">Использовать скиллы строго друг за другом</key>
+  <key name="L_atk_ad_max_time_skill">Максимальное время на использование скилла</key>
+  <key name="Desc_atk_ad_max_time_skill">Если скилл в режиме строгого порядка
+не будет использован за указанное время,
+то бот перейдет к следующему скиллу. (В одной секунде 1000 мс.)</key>
+  <key name="C_atk_ad_looting">Подбирать лут после убийства моба</key>
+  <key name="Desc_atk_ad_looting">[?] При отключении бот не будет автоматически лутать</key>
+  <key name="C_atk_ad_looting_antifreeze">Антизависание при лутании</key>
+  <key name="L_atk_ad_looting_antifreeze">раз(а)</key>
+  <key name="Desc_atk_ad_looting_antifreeze">[?] Рекомендуется, если лутание на сервере лагает</key>
+  <key name="C_atk_ad_looting_near">Лутать бесхозные трупы на расстоянии</key>
+  <key name="Desc_atk_ad_looting_near">[?] Лутание трупов лежащих рядом.
+Не рекомендуется, если у Вас слишком маленький рюкзак
+или из мобов падают предметы, которые невозможно подобрать без подтверждения.
+Для выбора необходимо назначить F9 для выбора ближайшего объекта.</key>
+  <key name="C_atk_ad_pause_after_dead_mob">Вставать на паузу после каждого убитого моба</key>
+  <key name="Desc_atk_ad_pause_after_dead_mob">[?] Говорят в совместных данжах нужная вещь...</key>
+  <key name="L_gart_header">Сбор ресурсов</key>
+  <key name="L_gart_distance">Расстояние от маршрута</key>
+  <key name="G_gart_primary_options">Основные настройки сбора</key>
+  <key name="L_gart_chat_command">Команда чата на выбор ресурса:</key>
+  <key name="C_gart_auto_attack">Собирать ресурсы в режиме Авто атака</key>
+  <key name="L_gart_macro">Кнопка с макросом на сбор ресурсов</key>
+  <key name="L_gart_max_time">Максимальное время на сбор одного ресурса</key>
+  <key name="C_gart_lvl_for">Уровень ресурса: от</key>
+  <key name="L_gart_lvl_to">до</key>
+  <key name="C_gart_name_res">Название содержит: (с учетом регистра)</key>
+  <key name="LC_gart_col_name">Название</key>
+  <key name="LC_gart_col_macro">Макрос</key>
+  <key name="Desc_gart_list">* Insert - добавить | Delete - удалить |  Двойной клик - изменить</key>
+  <key name="C_gart_atk">Отвечать на атаки агрессивных мобов и игроков</key>
+  <key name="C_gart_skip_if_near_player">Пропускать ресурс, если рядом с ним другой персонаж</key>
+  <key name="G_gart_fly">Полет</key>
+  <key name="C_gart_fly_goto_base">Время полета, пропуска всех ресурсов</key>
+  <key name="C_gart_percent_to_new_fly">Время полета (%), для нового взлета</key>
+  <key name="L_rad_header">Радар</key>
+  <key name="G_rad_filter">Фильтр</key>
+  <key name="C_rad_players">Игроки своей расы</key>
+  <key name="C_rad_enemy">Вражеские игроки</key>
+  <key name="C_rad_NPC_friendly">НПС [свои]</key>
+  <key name="C_rad_NPC_agro">НПС [атакуемые]</key>
+  <key name="C_rad_gather">Ресурсы</key>
+  <key name="C_rad_other">Остальное</key>
+  <key name="L_rad_name_contains">Имя содержит</key>
+  <key name="L_rad_level">Уровень &gt;</key>
+  <key name="C_rad_altitude">Высота разниться на</key>
+  <key name="C_rad_waypoints">Маршрут (WayPoints)</key>
+  <key name="G_rad_info">Информация об объекте</key>
+  <key name="C_rad_info_name">Имя</key>
+  <key name="C_rad_info_altitude">Высота</key>
+  <key name="C_rad_info_type">Тип</key>
+  <key name="C_rad_info_level">Уровень</key>
+  <key name="C_rad_info_range">Радиус агрессивности</key>
+  <key name="C_rad_info_health">Здоровье</key>
+  <key name="C_rad_info_distance">Расстояние</key>
+  <key name="C_rad_info_class">Класс</key>
+  <key name="C_rad_info_i_target">Я его цель</key>
+  <key name="G_rad_config">Конфигурация</key>
+  <key name="L_rad_config_zoom">Увеличение</key>
+  <key name="L_rad_config_pause">Пауза обновления</key>
+  <key name="C_rad_config_rotate">Поворачивать радар за камерой</key>
+  <key name="C_rad_config_on_top">Поверх всех окон</key>
+  <key name="L_rad_config_size">Размер радара</key>
+  <key name="C_rad_config_point_to_move">Точка для перемещения</key>
+  <key name="L_rad_config_opacity">Прозрачность радара</key>
+  <key name="B_rad_start">Запустить радар</key>
+  <key name="B_rad_stop">Убрать радар</key>
+  <key name="B_rad_combat_start">Боевой</key>
+  <key name="L_way_header">Движение по маршруту</key>
+  <key name="TAB_way_rec_select">Основное</key>
+  <key name="G_way_rec_new_way">Запись нового маршрута</key>
+  <key name="L_way_rec_type_new_way">Тип:</key>
+  <key name="L_way_rec_name_new_way">Название:</key>
+  <key name="L_way_rec_dist_new_way">Расстояние между точками</key>
+  <key name="B_way_rec_new_way">Запись</key>
+  <key name="B_way_rec_new_way_stop">Стоп</key>
+  <key name="G_way_rec_select_way">Используемые маршруты</key>
+  <key name="L_way_rec_pause_after">Пауза после каждого цикла</key>
+  <key name="TAB_way_anti">Антизастревание</key>
+  <key name="C_way_anti_09">Поворот на 110 градусов</key>
+  <key name="L_way_anti_if_first">если за первые</key>
+  <key name="L_way_anti_sec">секунд</key>
+  <key name="L_way_anti_run_mini">пробежал меньше</key>
+  <key name="C_way_anti_stop">Останавливать движение</key>
+  <key name="C_way_anti_return">Использовать "Возврат" к Кибелиску</key>
+  <key name="L_way_anti_if_no_ran">если не добежал до точки за</key>
+  <key name="L_way_anti_if_dist_point">если расстояние до точки ></key>
+  <key name="TAB_way_add">Дополнительно</key>
+  <key name="C_way_add_rize">Воскресать автоматически после смерти</key>
+  <key name="Desc_way_add_rize">[действительно для режимов Авто атака и Сбор ресурсов
+не зависимо от движения по маршруту]</key>
+  <key name="L_way_add_wait_after_rize">После воскрешения ждать на месте</key>
+  <key name="C_way_add_not_atk_after_rize">Возвращаясь после смерти никого не атаковать</key>
+  <key name="C_way_add_regen_end_way">В конце маршрута регенить HP/MP</key>
+  <key name="Desc_way_add_regen_end_way">[ время регена и пауза цикла плюсуются ]</key>
+  <key name="C_way_add_no_fly_end_way">В конце маршрута, если в полете, то складывать крылья</key>
+  <key name="C_way_add_quest_return">Использовать "Возврат" к Кибелиску для сдачи квеста</key>
+  <key name="L_craft_header">Крафт</key>
+  <key name="B_craft_wizzard">Мастер обучения</key>
+  <key name="L_craft_macro">Кнопка с макросом выбора мастера-НПС</key>
+  <key name="L_craft_example_macro">[?] Пример макроса:
+/выбор Утис
+/атака</key>
+  <key name="L_craft_num">Количество повторов крафта</key>
+  <key name="Desc_craft_num">[?] Количество повторов заданий. "0" - неограничено.</key>
+  <key name="L_craft_stop_after_fall">Остановка, после неудач подряд</key>
+  <key name="B_craft_start">Запуск</key>
+  <key name="L_craft_key_desc1">Основные моменты крафта:</key>
+  <key name="L_craft_key_desc2">- Покупка материалов не поддерживается.
+- Окно Игры должно быть всегда активно.
+Если не активно, то сразу завершение крафта.
+- После записи не менять расположение окон в Игре.
+- Окно "Изготовление" должно быть открыто.</key>
+  <key name="L_opt_header">Общие настройки</key>
+  <key name="TAB_opt_base">Основные</key>
+  <key name="C_opt_base_num_game_windows">Нумеровать окна игры при запуске</key>
+  <key name="C_opt_base_top_form">Поверх всех окон</key>
+  <key name="C_opt_base_pause_if_friendly">Ставить бота на паузу, если рядом есть другие персонажи</key>
+  <key name="C_opt_base_minimize">Свернуть окно игры и разворачивать при необходимости</key>
+  <key name="C_opt_base_restore">Восстанавливать окно игры до исходных размеров</key>
+  <key name="L_opt_base_pause_if_friendly_dist1">на расстоянии</key>
+  <key name="L_opt_base_pause_if_friendly_dist2">m или ближе</key>
+  <key name="L_opt_base_pause_if_friendly_time">и на паузе стоять не более</key>
+  <key name="L_opt_base_pause_if_friendly_ignore">игнорировать</key>
+  <key name="L_opt_base_skill_button">Кнопка, для использования скиллов</key>
+  <key name="C_opt_base_send_stats">Отправлять статистику на сайт</key>
+  <key name="C_opt_base_run_radar_after_select_client">Запускать радар, после выбора клиента Игры</key>
+  <key name="L_opt_base_transparency">Прозрачность этого окна</key>
+  <key name="L_opt_base_language">Язык:</key>
+  <key name="TAB_opt_profile">Профили</key>
+  <key name="LC_opt_list_profile_col_name">Уровень</key>
+  <key name="LC_opt_list_profile_col_class">Класс</key>
+  <key name="B_opt_profile_update">Обновить</key>
+  <key name="B_opt_profile_load">Загрузить</key>
+  <key name="B_opt_profile_save">Сохранить как...</key>
+  <key name="TAB_opt_keys">Клавиши</key>
+  <key name="L_opt_keys_tab">Выбор ближайшего врага</key>
+  <key name="L_opt_keys_f1">Выбор своего персонажа</key>
+  <key name="L_opt_keys_f8">Выбор ближайшей цели</key>
+  <key name="L_opt_keys_f9">Выбор ближайшего объекта</key>
+  <key name="L_opt_keys_x">Бой / обычный</key>
+  <key name="L_opt_keys_pageup">Взлет</key>
+  <key name="L_opt_keys_pagedown">Приземление</key>
+  <key name="L_opt_keys_j">Миссии / задания</key>
+  <key name="L_opt_sound_header">Звуки и события</key>
+  <key name="С_opt_sound">Звук</key>
+  <key name="С_opt_sound_exit">Выход из игры</key>
+  <key name="L_opt_sound_dead">Смерть</key>
+  <key name="L_opt_sound_inventory">Инвентарь</key>
+  <key name="L_opt_sound_enemy">Враг</key>
+  <key name="L_opt_sound_frendly">Свой</key>
+  <key name="L_opt_sound_gm">ГМ</key>
+  <key name="L_opt_sound_stop">Остановка</key>
+  <key name="L_opt_sound_start">Запуск</key>
+  <key name="L_opt_sound_pause">Пауза [+]</key>
+  <key name="L_opt_sound_resume">Пауза [-]</key>
+  <key name="L_opt_sound_pm">Приват</key>
+  <key name="L_opt_sound_level">Уровень</key>
+  <key name="C_opt_sound_pm_white">+ обычный чат</key>
+  <key name="C_opt_chat_log">Записывать в файл все приваты</key>
+  <key name="L_opt_sound_master_value">Общая громкость звуков</key>
+  <key name="TAB_opt_hot">Горячие клавиши</key>
+  <key name="L_opt_hot_desc">Глобальные горячие клавиши.
+Они работают всегда и везде, пока работает бот.
+Для изменения клавиши нажмите на текстовое поле, 
+затем нажмите нужное сочетание клавиш.
+P.s.: Использование сочетания Alt, Ctrl и/или Shift обязательно.</key>
+  <key name="С_opt_hot_start_stop">Запуск / остановка бота</key>
+  <key name="С_opt_hot_pause">Пауза / возобновление</key>
+  <key name="С_opt_hot_craft_wizzard">Мастер обучения</key>
+  <key name="С_opt_hot_radar">Запуск / остановка радара</key>
+  <key name="B_opt_hot_reset">Сброс по умолчанию</key>
+  <key name="L_find_wellcome">Добро пожаловать!</key>
+  <key name="L_find_client_window">Окно клиента игры:</key>
+  <key name="L_find_client_version">Версия клиента:</key>
+  <key name="L_find_enter_key">Введите ключ</key>
+  <key name="B_find_enter_key">Ввести ({0} попытки)</key>
+  <key name="L_about_version">Версия</key>
+  <key name="L_about_autor">Автор</key>
+  <key name="L_about_distribution">Распространение</key>
+  <key name="L_about_distribution_desc">Платное</key>
+  <key name="L_about_license">Вид лицензии</key>
+  <key name="L_about_license_desc">1 ключ = 1 бот
+на любом компьютере</key>
+  <key name="L_about_site">Сайт поддержки</key>
+  <key name="L_about_text">Используя данную программу Вы соглашаетесь с тем, что ее автор, как и продавец, не несут никакой ответственности за предоставленную программу, ее какую-либо некорректную работу, за наличие ошибок или не удовлетворение требованиям пользователя. 
+Вы используете данную программу как есть, на свой страх и риск.</key>
+  <key name="log_user_dead">Персонаж умер</key>
+  <key name="log_user_res">Воскресаем</key>
+  <key name="log_very_small_window">Окно слишком мало, воскрешение отменено...</key>
+  <key name="log_success_res">Успешное воскрешение</key>
+  <key name="log_waypoints_res">Маршрут воскрешения: {0}</key>
+  <key name="log_waypoints_dead_not_set">Не задан маршрут воскрешения.</key>
+  <key name="log_res_not_success">Воскрешение неудачно...</key>
+  <key name="log_exit_to_game">Выход из игры...</key>
+  <key name="log_find_number_windows">Найдено окон игры: {0}</key>
+  <key name="log_numbering_windows">Нумерация окон.</key>
+  <key name="log_game_not_find">Игра не найдена в системе!</key>
+  <key name="log_error_profile">Ошибка профиля {0}</key>
+  <key name="log_select_true_profile">Выбран подходящий профиль.</key>
+  <key name="log_select_not_profile">Подходящего профиля не найдено.</key>
+  <key name="log_create_new_profile">Будет создан новый профиль.</key>
+  <key name="log_new_profile_name">Профиль 1 - {0}</key>
+  <key name="log_new_version_bot">Обнаружена версия {0}</key>
+  <key name="Form_new_version_bot_update">Обновление: версия {0}</key>
+  <key name="Form_new_version_l_canges">Изменения относительно предыдущей версии:</key>
+  <key name="Form_new_version_b_update">Обновить</key>
+  <key name="Form_new_version_b_cancel">Не обновлять</key>
+  <key name="Form_new_version_l_recomend">Рекомендуется обновиться</key>
+  <key name="log_error_info_version">Ошибка получения информации о версии бота</key>
+  <key name="log_error_lost_game_window">Ошибка: Потеряно окно игры.</key>
+  <key name="log_error_lost_player">Ошибка: не найден персонаж в игре.</key>
+  <key name="log_crit_error">Критическая ошибка: {0}</key>
+  <key name="log_type_waypoints_normal">Тип маршрута: обычный</key>
+  <key name="log_type_waypoints_return">Тип маршрута: возвращение</key>
+  <key name="log_type_waypoints_quest">Тип маршрута: квест</key>
+  <key name="log_start_running">Запуск движения</key>
+  <key name="log_stop_running_pause">Остановка движения (Пауза)</key>
+  <key name="log_stop_running_for_flying">Остановка движения для взлета</key>
+  <key name="log_flying">Взлет</key>
+  <key name="log_continued_running">Продолжение движения</key>
+  <key name="log_landing">Посадка</key>
+  <key name="log_stuck1">Застрял! Поворот камеры +110 градусов</key>
+  <key name="log_stuck2">ОШИБКА: Движение по маршруту прекращено из-за застревания более {0} секунд в одной точке</key>
+  <key name="log_stuck3">ОШИБКА: Движение по маршруту прекращено из-за застревания более {0} секунд</key>
+  <key name="log_stuck4">ОШИБКА: Движение по маршруту прекращено из-за слишком большого расстояния до следующей точки {0} m</key>
+  <key name="log_waypoint_dead_success">Маршрут воскрешения пройден.</key>
+  <key name="log_waypoint_quest_success">Маршрут квеста пройден.</key>
+  <key name="log_waypoint_quest_moveto">Возвращение к НПС для сдачи квеста.</key>
+  <key name="log_waypoint_quest_success_2">Сдача квеста.</key>
+  <key name="log_waypoint_quest_take">Берем квест.</key>
+  <key name="log_waypoint_quest_pass">Сдаем квест.</key>
+  <key name="log_waypoint_quest_pass_fail">[!] Ошибка выбора НПС! Квест не сдан.</key>
+  <key name="log_waypoint_quest_kill_all">Убито достаточно по квесту, добегаем до конца маршрута.</key>
+  <key name="log_waypoint_wait_after_end">Ожидание {0} секунд</key>
+  <key name="log_begin_new_motion">Начинаю новый цикл движения</key>
+  <key name="log_begin_record_waypoints">Начало записи маршрута "{0}"</key>
+  <key name="alert_record_waypoints">Запись маршрута...
+{0} вейпоинт</key>
+  <key name="log_record_waypoints_success">Запись маршрута завершена</key>
+  <key name="log_error_record_waypoints_success">Ошибка записи маршрута! Удостоверьтесь, что программа имеет права на создание/запись файлов.</key>
+  <key name="log_error_load_options1">Ошибка при загрузке базовых настроек программы: [{0}] {1}</key>
+  <key name="log_error_load_options2">Ошибка при загрузке базовых настроек. код 1. {0}</key>
+  <key name="log_load_options_success">Загрузка базовых настроек программы...</key>
+  <key name="log_load_options_not_found_file">Файл базовых настроек программы не найден...</key>
+  <key name="log_error_load_profile1">Ошибка при загрузке профиля: {0}</key>
+  <key name="log_error_load_profile2">Ошибка при загрузке профиля. код 1. {0}</key>
+  <key name="log_load_profile_success">Загрузка профиля {0}</key>
+  <key name="log_load_profile_not_found_file">Файл профиля не найден...</key>
+  <key name="log_find_player">Попытка поиска игрока</key>
+  <key name="mes_durak_header">Защита от невнимательности</key>
+  <key name="mes_durak1_text">Проверьте настройки выбора цели.</key>
+  <key name="mes_durak2_text">Проверьте настройки Атака - Условия - Восстановление
+Даже если Вы включаете бота в режиме сбора ресурсов,
+он должен атаковать агрессивные цели.</key>
+  <key name="mes_durak3_text">Проверьте настройки сбора ресурсов.
+Назначена ли кнопка для макроса на сбор.</key>
+  <key name="mes_durak4_text">Проверьте настройки условий.
+Должно быть назначено хотябы одно условие.</key>
+  <key name="mes_error_access_bd">Ошибка: Нет доступа к базе. Дальнейшая работа невозможна.</key>
+  <key name="mes_durak5_text">Не выбран маршрут движения.
+Для запуска бота по маршруту, необходимо выбрать маршрут.
+Перейдите на вкладку маршрут и выберите по какому маршруту двигаться боту.</key>
+  <key name="log_query_run_bot">Запрос запуска...</key>
+  <key name="log_query_run_bot_fail">Запрос запуска невозможен!</key>
+  <key name="log_query_stop_bot">Запрос остановки...</key>
+  <key name="log_query_stop_bot_success">Остановка бота успешна.</key>
+  <key name="caser_buff">Бафф</key>
+  <key name="caser_HP_player">HP_игрока</key>
+  <key name="caser_MP_player">MP_игрока</key>
+  <key name="caser_HP_target">HP_цели</key>
+  <key name="caser_HP_pet">HP_саммона</key>
+  <key name="caser_DP_player">DP_игрока</key>
+  <key name="caser_fly_time">Время_полета</key>
+  <key name="caser_distance">Дистанция_до_цели</key>
+  <key name="log_caser_error1">Ошибка обработки условий</key>
+  <key name="log_caser_error2">Ошибка выполнения условий</key>
+  <key name="log_error_combo1">Ошибка использования комбо. код 1. {0}</key>
+  <key name="log_error_combo2">Ошибка использования комбо. код 2. {0}</key>
+  <key name="skill_if_hp">HP</key>
+  <key name="skill_if_mp">MP</key>
+  <key name="skill_if_dp">DP</key>
+  <key name="skill_if_distance_to_target">Дистанция до цели</key>
+  <key name="skill_if_hp_target">HP цели</key>
+  <key name="skill_if_hp_pet">HP духа/пета</key>
+  <key name="skill_if_hp_pet_not_found">СМ, без духа/пета</key>
+  <key name="skill_if_fly_time">Время полета</key>
+  <key name="skill_if_buff">Бафф</key>
+  <key name="skill_if_debuff">Снять дебафф</key>
+  <key name="skill_if_mantra">Мантра / заклятие</key>
+  <key name="skill_if_pause">+ пауза</key>
+  <key name="skill_if_cooldown">+ перезарядка</key>
+  <key name="log_error_use_skills_order_by">Ошибка использования скиллов по порядку. {0}</key>
+  <key name="log_error_use_skills">Ошибка использования скиллов.</key>
+  <key name="log_error_regen_start">Ошибка старта бота: Неверные параметры.</key>
+  <key name="log_regen_start">Реген HP / MP...</key>
+  <key name="log_regen_check">Проверка регена...</key>
+  <key name="log_regen_secondary_set">Вторичная посадка персонажа</key>
+  <key name="log_regen_attack">Прерывание регена, нас атакует "{0}"</key>
+  <key name="log_regen_stop">Завершение регена</key>
+  <key name="log_looting">Лут с {0} ({1})</key>
+  <key name="log_looting_success">Лутание успешно.</key>
+  <key name="log_looting_antiz">Антизависание при лутании...</key>
+  <key name="log_error_looting">Ошибка подбора лута. {0}</key>
+  <key name="log_attack_mode">Режим атаки</key>
+  <key name="log_attack_mode_begin">Начало атаки</key>
+  <key name="log_attack_mode_max_time">Максимальное время нанесения урона цели "{0}" прошло...</key>
+  <key name="log_attack_mode_begin_main">Основной атакующий цикл...</key>
+  <key name="log_main_closing_stop_bot">Перед закрытием приостановка активности бота.</key>
+  <key name="log_main_closing_stop_radar">Перед закрытием остановка радара.</key>
+  <key name="mes_error_select_window1">Неудалось подключиться к игре.</key>
+  <key name="mes_error_select_window2">Не найдено окно игры.</key>
+  <key name="log_error_sound_playing">Ошибка звука: {0}</key>
+  <key name="log_template_client">Шаблон клиента: {0}</key>
+  <key name="mes_error_init_combo">Ошибка инициализации комбо: </key>
+  <key name="mes_error_init_hotbar">Ошибка инициализации хотбара: </key>
+  <key name="mes_error_init_skills">Ошибка инициализации скиллов: </key>
+  <key name="mes_error_init_client">Ошибка инициализации: {0} L{1}.
+Убедитесь что выбрали правильную версию клиента.</key>
+  <key name="mes_error_init_scan">Ошибка в сканировании Игры...</key>
+  <key name="mes_radar_add_load_cpu">Радар существенно добавит нагрузку на процессор.
+Вы уверены, что хотите его задействовать?
+
+Для минимизации нагрузки на процессор увеличьте паузу обновления.</key>
+  <key name="mes_sound_enemy">Данная опция существенно добавит нагрузку на процессор.
+Вы уверены, что хотите его задействовать?</key>
+  <key name="mes_attention">Внимание!</key>
+  <key name="log_waypoint_rec_pause">Запись маршрута поставлена на паузу</key>
+  <key name="log_waypoint_rec_resume">Запись маршрута возобновлена</key>
+  <key name="log_bot_pause">Бот поставлен на паузу</key>
+  <key name="log_bot_resume">Работа бота возобновлена</key>
+  <key name="CaseForm_header_add_condition">Добавить условие...</key>
+  <key name="CaseForm_b_add">Добавить</key>
+  <key name="CaseForm_l_condition">Условие</key>
+  <key name="CaseForm_l_value">Значение</key>
+  <key name="CaseForm_l_time">Время</key>
+  <key name="CaseForm_l_button">Кнопка</key>
+  <key name="log_error_caseform_add">Ошибка добавления условия</key>
+  <key name="CaseForm_header_change_condition">Изменить условие...</key>
+  <key name="CaseForm_b_change">Изменить</key>
+  <key name="log_error_caseform_change">Ошибка изменения условия</key>
+  <key name="mes_way_rec_small_name">Название нового маршрута должно содержать как минимум 1 символ</key>
+  <key name="mes_way_rec_rewrite">Старый маршрут "{0}"
+будет безвозвратно заменен на записанный!
+
+Вы уверены, что хотите его перезаписать на новый?</key>
+  <key name="mes_way_rec_rewrite_header">Маршрут с таким именем уже существует</key>
+  <key name="log_error_selecting_target1">Ошибка выбора цели. Код 1: {0}</key>
+  <key name="log_error_selecting_target_fail">Не удалось выбрать: {0} [d = {1}m]</key>
+  <key name="log_error_selecting_target2">Ошибка выбора цели. Код 2: {0}</key>
+  <key name="log_start_bot">[!] Запуск бота</key>
+  <key name="log_bot_mode">Режим: {0}</key>
+  <key name="mes_check_options_gart">Проверьте настройки сбора ресурсов</key>
+  <key name="log_bot_waypoints">Маршрут: {0}</key>
+  <key name="log_find_lootable">Найден бесхозный труп "{0}"</key>
+  <key name="log_find_target">Цель: {0} ({1})</key>
+  <key name="log_attack_error">Ошибка атаки: {0}</key>
+  <key name="log_find_res">Найден ресурс: {0}</key>
+  <key name="log_find_res_near_player">Рядом с ресурсом обнаружен персонаж "{0}" d={1}. Пропускаем...</key>
+  <key name="log_find_res_gart_selecting">Выбор "{0}" d={1}</key>
+  <key name="log_find_res_gart">Сбор ресурса...</key>
+  <key name="log_find_res_gart_error_selecting">Неудача. Ресурс не выбран...</key>
+  <key name="log_find_res_timeout">Время на сбор вышло!</key>
+  <key name="log_error_gart">Ошибка сбора: {0}</key>
+  <key name="log_error_bot_mode_conditions">Ошибка режима условий: {0}</key>
+  <key name="log_error_bot_mode_conditions_attack">Ошибка режима атака + условия: {0}</key>
+  <key name="log_pause_if_friendly">Остановка на паузу. Рядом обнаружен дружественный персонаж "{0}" d={1}.</key>
+  <key name="log_pause_if_friendly_add_ignore">Максимальное время паузы истекло. "{0}" добавлен в список игнорирования.</key>
+  <key name="log_pause_attack">Нас атакует моб - бот не хочет умирать на паузе.</key>
+  <key name="log_pause_if_friendly_left">Возобновление фарма. Дружественный персонаж покинул территорию.</key>
+  <key name="log_exit_if_first_dead">Выход из игры... [Включена настройка на немедленный выход из Игры при смерти персонажа]</key>
+  <key name="log_bot_stop">[!] Остановка бота</key>
+  <key name="log_attack_end">Завершение атаки цели.</key>
+  <key name="log_pause_after_attack">АвтоПауза после убийства моба...</key>
+  <key name="statistic_mini">Статистика
+Убито: {0}
++Exp: {1}
+Exp\мин: {2}
+Осталось до уровня:
+{3}</key>
+  <key name="AddForm_add_header">Добавить в список...</key>
+  <key name="AddForm_add_button">Добавить</key>
+  <key name="AddForm_change_header">Изменить...</key>
+  <key name="AddForm_change_button">Изменить</key>
+  <key name="AddForm_cancel_button">Отмена</key>
+  <key name="AddForm_l_content">Название содержит</key>
+  <key name="AddForm_l_button">Кнопка c макросом</key>
+  <key name="log_end_time_key">Время ключа вышло. Закрытие программы.</key>
+  <key name="L_authorization">&lt;html&gt;&lt;strong&gt;Авторизация:&lt;/strong&gt;&lt;br/&gt;попытка № {0}&lt;/html&gt;</key>
+  <key name="mes_error_authorization">Ошибка подключения к серверу авторизации!
+Проверьте, открыт ли доступ бота к сайту. Возможно так же, что у Вас не установлен .Net Framework 3.5 sp1.</key>
+  <key name="log_error_authorization">Ошибка авторизации: невозможно подключиться к сайту авторизации</key>
+  <key name="log_error_authorization_time">Ошибка авторизации: пользователь с данным ключем уже подключен</key>
+  <key name="mes_error_authorization_time">Пользователь с данным ключем уже подключен.
+Или данный ключ недействителен / просрочен.
+
+Если вы являетесь единственным владельцем ключа и уверены,
+что нигде сейчас этот ключ не используется,
+то подождите некоторое время (до 5 минут) и запустите программу снова.
+
+Для проверки активности ключа зайдите на сайт в раздел "Мои ключи".</key>
+  <key name="mes_error_authorization_time_header">Ошибка авторизации</key>
+  <key name="log_error_authorization1">Ошибка авторизации: код 1. {0}</key>
+  <key name="log_error_save_license_file">Ошибка: Неудалось сохранить ключ в файл.</key>
+  <key name="account_time_normal">Ваш ключ действителен до {0}</key>
+  <key name="L_nick_logged">&lt;html&gt;Ваш ник: &lt;strong&gt;{0}&lt;/strong&gt;&lt;/html&gt;</key>
+  <key name="L_wellcome_logged">&lt;html&gt;&lt;strong&gt;Добро пожаловать,&lt;/strong&gt;&lt;br/&gt;{0}&lt;/html&gt;</key>
+  <key name="log_logged">Успешная авторизация, логин - "{0}"</key>
+  <key name="log_logged_fail">Неудачная авторизация. Закрытие программы. ({0} | {1} | {2} | {3})</key>
+  <key name="log_error_radar_open">Ошибка радара при открытии: {0}</key>
+  <key name="log_error_radar_close">Ошибка радара при закрытии: {0}</key>
+  <key name="log_error_radar">Ошибка радара: {0}</key>
+  <key name="log_error_definition_running">Ошибка определения состояния {0}</key>
+  <key name="log_error_fill_list_combo">Ошибка заполнения списка используемых комбо... {0}</key>
+  <key name="log_error_chat">Ошибка чата: {0}</key>
+  <key name="log_error_chat_pause">Ошибка паузы чата: {0}</key>
+  <key name="log_error_chat_send">Ошибка отправки сообщения в чат. {0}</key>
+  <key name="log_error_skill_move_up">Ошибка перемещения скилла на уровень выше. {0}</key>
+  <key name="log_error_skill_move_down">Ошибка перемещения скилла на уровень ниже. {0}</key>
+  <key name="log_erorr_change_ghotkey">Ошибка: неудалось изменить глобальную горячую клавишу. {0}</key>
+  <key name="mes_erorr_change_ghotkey">Кнопка {0} занята!
+Она не может использоваться как глобальная горячая клавиша!</key>
+  <key name="log_run_craft">Запуск крафта.</key>
+  <key name="log_run_master_craft">Запущен мастер обучения крафту.</key>
+  <key name="L_craftwizzard_step">Шаг {0}</key>
+  <key name="L_craftwizzard_header">Мастер настройки крафта</key>
+  <key name="L_craftwizzard_2">2. Нажмите на {0}</key>
+  <key name="L_craftwizzard_1_step1">1. Наведите курсор на кнопку Заказы</key>
+  <key name="L_craftwizzard_1_step2">1. Наведите курсор на самый верхний заказ</key>
+  <key name="L_craftwizzard_1_step3">1. Наведите курсор на кнопку Согласиться</key>
+  <key name="L_craftwizzard_1_step4">1. Пробегите до стола. Наведите курсор на заказ в окне заказов</key>
+  <key name="L_craftwizzard_1_step5">1. Наведите курсор на кнопку Изготовить все</key>
+  <key name="L_craftwizzard_1_step6">1. Пробегите до НПС. Откройте диалог. Наведите курсор на кнопку Заказы</key>
+  <key name="L_craftwizzard_1_step7">1. Наведите курсор на самый верхний заказ</key>
+  <key name="L_craftwizzard_1_step8">1. Наведите курсор на кнопку Принять</key>
+  <key name="L_craftwizzard_1_step9">1. Наведите курсор на верхний заказ в окне заказов</key>
+  <key name="L_craftwizzard_1_step10">1. Наведите курсор на кнопку Отказаться</key>
+  <key name="L_craftwizzard_1_step11">1. Наведите курсор на кнопку Принять в окне подтверждения отмены задания</key>
+  <key name="log_craftwizzard_done">Мастер обучения крафту завершен.</key>
+  <key name="log_craftworker_fail">Крафт - {0} отказ от задания... ({1})</key>
+  <key name="log_craftworker_fail_streak">Подряд {0} неудачи! - завершение крафта.</key>
+  <key name="log_error_craftworker">Ошибка крафта: {0}</key>
+  <key name="log_craftworker_done">Крафт - завершен {0} цикл</key>
+  <key name="log_exit_craftworker">Выход из цикла крафта.</key>
+  <key name="log_craftworker_done2">[крафт завершен]</key>
+  <key name="log_error_save_craft">Ошибка сохранения файла крафта: {0}</key>
+  <key name="log_error_load_craft1">Ошибка при загрузке настроек крафта: [{0}] {1}</key>
+  <key name="log_load_craft_success">Загрузка настроек крафта. Шагов: {0}</key>
+  <key name="log_load_craft_not_found_file">Файл настройки крафта не найден...</key>
+  <key name="mes_way_not_selected_type">Не выбран тип маршрута!</key>
+  <key name="L_questwizzard_step">Шаг {0}</key>
+  <key name="log_run_master_quest">Запущен мастер обучения квесту.</key>
+  <key name="L_questwizzard_header">Мастер настройки получения квеста</key>
+  <key name="L_questwizzard_2">2. Нажмите на {0}</key>
+  <key name="L_questwizzard_1_step1">1. Наведите курсор ниже заголовка</key>
+  <key name="L_questwizzard_1_step2">1. Наведите курсор рядом с кнопкой Закрыть. Там где будет кнопка Принять</key>
+  <key name="log_questwizzard_done">Мастер обучения квесту завершен.</key>
+  <key name="log_error_save_quest">Ошибка сохранения файла квеста: {0}</key>
+  <key name="log_error_load_quest1">Ошибка при загрузке настроек крафта: [{0}] {1}</key>
+  <key name="log_load_quest_success">Загрузка настроек квеста. Шагов: {0}</key>
+  <key name="log_load_quest_not_found_file">Файл настройки квеста не найден...</key>
+  <key name="log_kill_quest_mob">Засчитан {0} квестовый моб!</key>
+  <key name="L_way_select_normal">Обычный:</key>
+  <key name="L_way_select_return">Возвращение:</key>
+  <key name="G_way_select_quest">Квестовый маршрут</key>
+  <key name="L_way_select_quest">Квест:</key>
+  <key name="L_way_select_quest_num_mobs">Количество мобов для сдачи квеста</key>
+  <key name="L_way_select_quest_names">Названия мобов содержат</key>
+  <key name="L_way_select_quest_name_NPC">Имя НПС</key>
+  <key name="L_way_select_quest_begin">Начать с</key>
+  <key name="B_way_select_quest_wizzard">Обучение разговора с НПС</key>
+  <key name="C_way_select_quest_0">Взятие у НПС квеста</key>
+  <key name="C_way_select_quest_1">Движение к месту фарма</key>
+  <key name="C_way_select_quest_2">Фарм монет</key>
+  <key name="C_way_select_quest_3">Завершения фарма</key>
+  <key name="C_way_select_quest_4">Движение к НПС</key>
+  <key name="C_way_select_quest_5">Сдача квеста НПС</key>
+  <key name="log_running_stopped">Движение остановлено</key>
+  <key name="log_find_GM">[ ТРЕВОГА ] Обнаружен ГМ "{0}"</key>
+  <key name="log_find_GM_exit">[!] Выход из игры из-за обнаружения ГМ-а!</key>
+  <key name="log_find_frendly_exit">[!] Выход из игры из-за обнаружения игрока своей расы!</key>
+  <key name="way_none">[ нет ]</key>
+  <key name="log_exit_if_inventory_full">Инвентарь переполнен. Выходим из игры.</key>
+  <key name="log_exit_if_max_level">Достигнут уровень персонажа, для выхода из игры.</key>
+  <key name="log_to_way_m">До маршрута {0}m</key>
+  <key name="log_return_start">Возврат к кибелиску и рестарт бота</key>
+  <key name="log_return_wait_coldown">Ожидание готовности скилла "Возврат"</key>
+  <key name="log_return_use">Использование скилла "Возврат"</key>
+  <key name="log_return_wait_teleport">Ожидание телепорта</key>
+  <key name="log_return_wait_find_player">Дополнительное ожидание - поиск персонажа</key>
+  <key name="log_return_fail">Неудачное возвращение</key>
+  <key name="log_return_restart_now">Перезапуск бота с маршрута возвращения</key>
+  <key name="log_return_error">Ошибка возвращения {0}</key>
+  <key name="log_waypoints_nav_error">Ошибка движения по маршруту {0}</key>
+  <key name="log_attack_cases_error">Ошибка атакующих условий {0}</key>
+  <key name="log_attack_worker_attack_error">Ошибка ветки атаки {0}</key>
+  <key name="log_main_cicle_error">Ошибка главного цикла {0}</key>
+  <key name="C_gart_use_potion">Банка</key>
+  <key name="L_gart_use_potion_if">при &lt;</key>
+  <key name="L_gart_use_potion_cooldown">откат</key>
+  <key name="log_return_sendkey">Ошибка отправки клавиши.</key>
+  <key name="C_atk_select_target_from_chat">Выбирать цель через чат командой</key>
+  <key name="Mes_expires_use">Срок использования программы истекает через {0} дней.
+Для продления подписки пройдите на сайт rubotaion.ru в раздел "Мои ключи".
+Перейти на сайт?</key>
+  <key name="log_find_enemy_exit">[!] Выход из игры из-за обнаружения игрока вражеской расы!</key>
+  <key name="TT_tab_info">Инфо / Запуск</key>
+  <key name="TT_tab_attack">Атака</key>
+  <key name="TT_tab_gart">Сбор ресурсов</key>
+  <key name="TT_tab_radar">Радар</key>
+  <key name="TT_tab_waypoints">Маршруты</key>
+  <key name="TT_tab_craft">Крафт</key>
+  <key name="TT_tab_alerts">Звуки и события</key>
+  <key name="TT_tab_options">Общие настройки</key>
+  <key name="TT_tab_find">Поиск игры</key>
+  <key name="TT_tab_about">О программе</key>
+  <key name="RADAR_battle_target">Цель: {0} [{1}] {2}/{3}</key>
+  <key name="RADAR_battle_target_not_selected">Цель не выбрана</key>
+  <key name="RADAR_battle_friendly">Дружественных: {0} </key>
+  <key name="RADAR_battle_friendly_not_found">Своих нет</key>
+  <key name="RADAR_battle_enemy20+">Врагов:  {0} [{1} - {2}]</key>
+  <key name="RADAR_battle_enemy_not_found">Врагов не обнаружено</key>
+  <key name="C_opt_base_remind_expiration">Напоминать об окончании действия ключа</key>
+  <key name="Mes_error_craft_button_select_npc">Не назначена кнопка с макросом на выбор и разговор с НПС</key>
+  <key name="Mes_trial">Вы используете ознакомительную версию.
+Данное сообщение будет показываться каждые 8 минут.
+В этом режиме некоторые функции бота недоступны.</key>
+  <key name="Mes_trial_expires">Данный триальный ключ более недействителен.</key>
+  <key name="C_way_type_0">Обычный</key>
+  <key name="C_way_type_1">Возвращение после смерти</key>
+  <key name="C_way_type_2">Квест на монеты</key>
+  <key name="RAD_class0">Воин</key>
+  <key name="RAD_class1">Гладиатор</key>
+  <key name="RAD_class2">Страж</key>
+  <key name="RAD_class3">Следопыт</key>
+  <key name="RAD_class4">Убийца</key>
+  <key name="RAD_class5">Стрелок</key>
+  <key name="RAD_class6">Маг</key>
+  <key name="RAD_class7">Волшебник</key>
+  <key name="RAD_class8">Заклинатель</key>
+  <key name="RAD_class9">Жрец</key>
+  <key name="RAD_class10">Целитель</key>
+  <key name="RAD_class11">Чародей</key>
+  <key name="RAD_class12">Инженер</key>
+  <key name="RAD_class13">Механик</key>
+  <key name="RAD_class14">Снайпер</key>
+  <key name="RAD_class15">Артист</key>
+  <key name="RAD_class16">Бард</key>
+  <key name="RAD_class17">Броненосец</key>
+  <key name="C_opt_base_to_tray">Сворачивать приложение в трей (рядом с часами)</key>
+  <key name="B_pause">Пауза</key>
+  <key name="log_cancel_exit_game_lvl">[!] Отменено событие выхода из игры при достижения уровня</key>
+  <key name="TT_tab_stats">Статистика</key>
+  <key name="L_stats_header">Статистика</key>
+  <key name="L_stats_inventory">Инвентарь</key>
+  <key name="L_stats_kinah">Кина</key>
+  <key name="L_stats_auk">На ауке</key>
+  <key name="L_stats_ubito">Убито</key>
+  <key name="L_stats_sobrano">Собрано</key>
+  <key name="L_stats_exp_plus">Опыта</key>
+  <key name="L_stats_exp_min">Опыт / мин</key>
+  <key name="L_stats_to_lvl">До уровня</key>
+  <key name="L_stats_time_start">Время работы</key>
+  <key name="N_atk_sk_heal_skills">Лечение</key>
+  <key name="N_atk_sk_mantra_skills">Мантры</key>
+  <key name="N_atk_sk_heal_skills_desc">Как обычные скиллы, только проверяются после каждого атакующего скилла.
+Для каждого хила необходимо добавить условие уровня HP.</key>
+  <key name="N_atk_sk_mantra_skills_desc">Мантры используются во всех режимах запущенного бота.
+Дополнительного условия устанавливать не требуется.</key>
+  <key name="L_opt_sound_distance">на расстоянии</key>
+  <key name="L_opt_sound_activate_window">Активация окна</key>
+  <key name="TAB_opt_sound_major">Важные</key>
+  <key name="TAB_opt_sound_standart">Стандартные</key>
+  <key name="L_stats_deaths">Смертей</key>
+  <key name="L_stats_ubito_min">Убито / мин</key>
+  <key name="L_stats_sobrano_min">Собрано / мин</key>
+  <key name="log_exit_if_pm">Выход из игры - получен ПМ</key>
+  <key name="log_caser_error3">Ошибка выполнения условия. Клавиша {0}.</key>
+  <key name="log_do_skills_after_dead">Выполнение скилов после воскрешения.</key>
+  <key name="N_atk_sk_after_dead">После воскрешения</key>
+  <key name="N_atk_sk_after_dead_desc">Скилы используются после успешного автоматического воскрешения персонажа.</key>
+  <key name="TIP_atk_sk_available">Кнопка</key>
+  <key name="log_do_skills_before_start_bot">Выполнение скилов перед запуском бота.</key>
+  <key name="N_atk_sk_before_start_bot">Перед запуском бота</key>
+  <key name="N_atk_sk_before_start_bot_desc">Скилы используются сразу после нажатие на кнопку Запуск.</key>
+  <key name="log_trial_max_level">[!] Пробный период работает только с персонажами {0} уровня, или ниже.</key>
+  <key name="skill_if_companion">питомец</key>
+  <key name="log_looting_uni_success">Лутание уникальной вещи успешно.</key>
+  <key name="L_stats_channel">Канал</key>
+  <key name="C_atk_ad_looting_uni">Подбирать лут, требующий подтверждения</key>
+  <key name="log_new_path">Путь к файлам бота: "{0}"</key>
+  <key name="log_new_waypoints">Путь к папке с маршрутами: "{0}"</key>
+  <key name="log_waypoint_reverse">Реверс маршрута</key>
+  <key name="C_opt_profile_save">Сохранять профиль при закрытии бота</key>
+  <key name="C_opt_base_updates">Проверять обновления программы</key>
+  <key name="C_atk_max_battle_time">Максимальное время боя</key>
+  <key name="Desc_atk_max_battle_time">Время, которое отводится на бой с 1 монстром в любом режиме бота.
+Если время истечет, то бот прекращает атаковать цель
+и игнорирует ее до установленного времени.</key>
+  <key name="L_atk_max_ignore_time">Максимальное время игнорирования</key>
+  <key name="Desc_atk_max_ignore_time">На игнорирование потенциальной цели.
+Это происходит, если бот не смог атаковать цель
+в течении {0} секунд,
+либо максимальное время боя истекло.</key>
+  <key name="log_attack_mode_max_battle_time">Максимальное время боя с целью {0} истекло.</key>
+  <key name="C_opt_halt">Выключать компьютер</key>
+  <key name="C_atk_ad_target_player">Атаковать игроков своей расы (Атака + условия)</key>
+  <key name="log_select_window">Выбрано окно: {0}</key>
+  <key name="log_new_window">Параметр окна: {0}</key>
+  <key name="log_new_profiles">Путь к профилям: {0}</key>
+  <key name="log_new_sounds">Путь к звукам: {0}</key>
+  <key name="log_new_data">Путь к остальным файлам: {0}</key>
+  <key name="G_opt_after_exit_game">При событии выхода из игры</key>
+  <key name="C_opt_kill_process">Убивать процесc</key>
+  <key name="C_opt_use_return_after_exit_game">Скилл "Возвращение"</key>
+  <key name="log_teleport">! ТЕЛЕПОРТ !</key>
+  <key name="log_cancel_user_res">Воскрешение отменено.</key>
+  <key name="log_new_log_path">Путь к логам: {0}</key>  
+  <key name="GL_Yes">Да</key>
+  <key name="GL_No">Нет</key>
+  <key name="P_cat_main">Важные</key>
+  <key name="P_cat_basic">Стандартные</key>
+  <key name="P_cat_alerts">События</key>
+  <key name="P_cat_radar">Радар</key>
+  <key name="P_enable">Включить</key>
+  <key name="P_disable">Выключено</key>
+  <key name="P_enable_desc">Обрабатывать событие</key>
+  <key name="P_sound">Проигрывать звук</key>
+  <key name="P_sound_desc">Воспроизводить звук при событии</key>
+  <key name="P_activate_window">Активировать окно</key>
+  <key name="P_activate_window_desc">Окно разворачивается и выводится на передний план</key>
+  <key name="P_exit_game">Выходить из игры</key>
+  <key name="P_exit_game_desc">Выходить из игры при этом событии</key>
+  <key name="P_twitter">Твиттер</key>
+  <key name="P_twitter_desc">Отправлять сообщение о событии на твиттер</key>
+  <key name="P_exec_script">Скрипт</key>
+  <key name="P_exec_script_desc">Запуск внешнего файла при событии</key>
+  <key name="P_dist">Дистанция</key>
+  <key name="P_dist_desc">Дистанция от персонажа</key>
+  <key name="P_additional">Дополнительно</key>
+  <key name="P_additional_desc">Дополнительные настройки</key>
+  <key name="P_alert_run_bot">Запуск бота</key>
+  <key name="P_alert_run_bot_desc">Событие при запуске бота.</key>
+  <key name="P_alert_stop">Остановка бота</key>
+  <key name="P_alert_stop_desc">Событие при остановке бота</key>
+  <key name="P_alert_pause_enable">Пауза бота</key>
+  <key name="P_alert_pause_enable_desc">Событие при постановке бота на паузу</key>
+  <key name="P_alert_pause_disable">Возобновление</key>
+  <key name="P_alert_pause_disable_desc">Событие при снятия бота с паузы</key>
+  <key name="P_alert_pm">Приват</key>
+  <key name="P_alert_pm_desc">Событие при получении личного сообщения в чате</key>
+  <key name="P_alert_dead_bot">Смерть персонажа</key>
+  <key name="P_alert_dead_bot_desc">Событие при смерти персонажа</key>
+  <key name="P_alert_inventory_full">Инвентарь</key>
+  <key name="P_alert_inventory_full_desc">Событие при переполнении инвентаря</key>
+  <key name="P_alert_enemy">Враг</key>
+  <key name="P_alert_enemy_desc">Событие при появлении рядом игрока противоположной расы</key>
+  <key name="P_alert_friendly">Свой</key>
+  <key name="P_alert_friendly_desc">Событие при появлении рядом игрока своей расы</key>
+  <key name="P_alert_gm">GM</key>
+  <key name="P_alert_gm_desc">Событие при появлении рядом GM-а</key>
+  <key name="P_alert_level">Уровень игрока</key>
+  <key name="P_alert_level_desc">Событие при достижении уровня игрока</key>
+  <key name="P_alert_level2">Уровень</key>
+  <key name="P_alert_level2_desc">Уровень игрока + процент опыта (Например 15.95 - это 15 уровень + 95% опыта)</key>
+  <key name="P_and_write_chat">Белый чат</key>
+  <key name="P_and_write_chat_desc">Добавлять записи белого чата</key>
+  <key name="P_write_to_file_boll">В файл</key>
+  <key name="P_write_to_file_boll_desc">Записывать все сообщения в файл</key>
+  <key name="P_write_to_file">Путь к файлу</key>
+  <key name="P_write_to_file_desc">В указанную папку будет сохранятся файл чата</key>
+  <key name="P_alerts">События</key>
+  <key name="P_alerts_desc">Настройки событий</key>
+  <key name="P_radars">Радары</key>
+  <key name="P_radars_desc">Настройки радаров</key>
+  <key name="C_way_add_way_reverse">Реверс обычного маршрута,
+если точки начала и конца далеко друг от друга</key>
+  <key name="TAB_opt_sound_teleport">Телепорт</key>
+  <key name="С_opt_sound_stop">Остановка бота</key>
+  <key name="С_opt_sound_pause">Пауза бота на</key>
+  <key name="С_opt_sound_message">Фраза</key>
+  <key name="L_opt_sound_repeat">Повторить через</key>
+  <key name="GL_times">раз</key>
+  <key name="L_opt_sound_restart">Перезапустить маршрут, если он рядом</key>
+  <key name="L_opt_sound_restart_mobs">Перезапуск без маршрута, если уровень мобов</key>
+  <key name="GL_from">от</key>
+  <key name="GL_to">до</key>
+  <key name="TAB_opt_sound_pm">Ответ на ПМ</key>
+  <key name="С_opt_sound_pm_answer">Отвечать на ПМ</key>
+  <key name="skill_if_cooldown_id">Откат скилла</key>
+  <key name="C_opt_base_write_stats">Записывать в файл</key>
+  <key name="C_atk_combo_ex">Продвинутые комбо</key>
+  <key name="C_atk_ad_not_attack_enemy_players">Не атаковать игроков вражеской расы</key>
+  <key name="J_send_help">Команда не распознана.
+Справочник команд.
+/info  /i  - краткая статистика.
+/player /p - краткая информация о состоянии персонажа.
+/chat      - последние 20 строк общего чата.
+/chatall   - последние 500 строк общего чата.
+/pm        - все личные сообщения.
+/mess  /m  - отправить сообщение в чат.
+/target /t - выбранная цель персонажа.
+/ver       - версия бота.
+/time      - срок окончания ключа.
+/start     - запуск бота.
+/stop      - остановка бота.
+/mode      - изменение индекса режима. Например '/mode 0' - Автоатака, '/mode 1' - Сбор ресурсов.
+/options   - выводит файл загруженных обших настроек.
+/profiles  - выводит файл загруженного профиля.
+/cmd       - бот запускает внешнюю программу. Например '/cmd calc'.
+/dconnect  - бот разрывает соединение по протоколу xmpp (jabber).
+/exit      - быстрое завершение работы бота. Игра не закрывается.
+/quit      - завершение работы бота. Игра закрывается.
+  </key>
+  <key name="G_way_add_resume">После паузы двигаться</key>
+  <key name="R_way_add_resume_next_5">К оптимальной точке из следующих 5 на маршруте</key>
+  <key name="R_way_add_resume_near">К ближайшей точке на всем маршруте</key>
+  <key name="C_opt_keys_plyer_action_enable">Минимальное использование кнопок</key>
+  <key name="skill_if_repeat_n">Повторить</key>
+  <key name="skill_if_2_mobs">Атакуют 2 моба</key>
+  <key name="C_way_add_way_regen">Садится на реген только вблизи маршрута</key>
+  <key name="C_bot_mode_script">Скрипт</key>
+  <key name="log_start_script">Запуск скрипта "{0}"</key>
+  <key name="log_start_script_void">Выполнение функции "{0}"</key>
+  <key name="log_start_script_void_end">Выход из функции "{0}"</key>
+  <key name="log_start_script_var_changed">Переменная {0} = {1}</key>
+  <key name="log_new_scripts">Путь к папке со скриптами: "{0}"</key>
+  <key name="mes_script_exit_loop">Выйти из этого цикла?</key>
+  <key name="mes_script_exit_script">Прервать выполнение скрипта?</key>
+  <key name="mes_script_error_usl_int">Ошибка. Упущен оператор +, -, * или /</key>
+  <key name="mes_script_error_usl_str">Ошибка. Упущен оператор +</key>
+  <key name="mes_script_error_variable">Ошибка. Неизвестная переменная</key>
+  <key name="mes_script_error_variable_text">Неизвестная переменная: "{0}"</key>
+  <key name="mes_script_error_usl_text">Нужен оператор: "{0}"</key>  
+  <key name="mes_script_error_line">Линия</key>
+  <key name="mes_script_error_1">Переменная "{0}" уже была инициализирована</key>
+  <key name="mes_script_error_2">Упущен оператор</key>
+  <key name="mes_script_error_3">Неизвестный индентификатор или переменная "{0}"</key>
+  <key name="mes_script_error_4">Неизвестный метод или свойство "{0}"</key>
+  <key name="mes_script_error_5">Файл маршрутов "{0}" не найден</key>
+  <key name="mes_script_error_6">Ошибка загрузки файла маршрутов "{0}"</key>
+  <key name="mes_script_error_7">Ошибка добавления "{0}" функции</key>
+  <key name="mes_script_error_8">Файл "{0}" не существует</key>
+  <key name="mes_script_error_9">Упущены переменные в функции "{0}"</key>
+  <key name="mes_script_error_10">В родительском цикле for уже используется переменная "{0}"</key>
+  <key name="mes_script_error_11">Массив не содержит индекс "{0}"</key>
+  <key name="C_atk_next_agro">Атаковать агрессивных мобов, до их нападения</key>
+  <key name="skill_if_stage_time">Время этапа</key>
+  <key name="skill_if_level">Уровень игрока</key>  
+  <key name="B_change_script">Изменить скрипт</key>
+  <key name="mes_changeed_script_header">Скрипт был изменен</key>
+  <key name="mes_changeed_script_text">Сохранить изменения?</key>
+  <key name="log_use_flypotition_in_gart">Используем зелье на полет</key>
+  <key name="log_captcha_detected">Обнаружена капча...</key>
+  <key name="log_captcha_try_ans">Разгадали как: {0}</key>
+  <key name="log_captcha_err_ans">Ошибка. Не найдено место ввода капчи</key>
+  <key name="skill_if_name_contains">Имя содержит</key>
+  <key name="C_opt_base_activation_2">Активация игры 2.0</key>
+  <key name="log_waypoint_quest_take_fail">Ошибка. Не обнаружен НПС {0}.</key>
+  <key name="mes_script_error_12">Отсутствует метка "{0}" для оператора goto</key>
+  <key name="C_way_anti_return_in_script">Использовать "Возвращение" в режиме Скрипт</key>
+  <key name="log_player_trageting">Нас выбрал персонаж "{0}".</key>
+  <key name="C_way_add_wait_dabuff">После воскрещения ждать снятия дебаффа</key>
+  <key name="L_atk_st_target_h">Разность высоты:</key>
+  <key name="C_atk_skills_autoupd">Автоматически обновлять уровень скиллов</key>
+  <key name="N_atk_sk_always">Всегда</key>
+  <key name="N_atk_sk_always_desc">Скилы используются постоянно. Рекомендуется добавить какое-либо условие.</key>
+</lang>
