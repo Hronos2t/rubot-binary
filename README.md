@@ -1,6 +1,8 @@
 # rubot-binary
 Paid bot for MMORPG AION
 
+official site https://rubotaion.ru
+
 ## Requiments
 - Windows 7 or newer (32 or 64 bit)
 - .NET framework 4.5
@@ -17,10 +19,10 @@ Paid bot for MMORPG AION
 
 ## Runing clients in 32-bit edition on Windows x64
 ### NA
-- start game launcher
-- before runing game rename or delete `<PathToGame>/bin64/aion.bin` file
-- start game
+- rename or delete `<PathToGame>/bin64/aion.bin` file
+- download [xignCodeFake](https://github.com/Hronos2t/XCFakeClient/releases/download/v1-beta1/x3.xem) and replace file `<PathToGame>/bin32/XignCode/x3.xem`
+- start the game
 
 ### EU - GameForge
-- don't use game launcher (use only for update)
-- run script file
+- [!] use game launcher only for update
+- run `start bin32\aion.bin -ip:79.110.83.80 -port:2106 -cc:2 -lang:eng -noweb -noauthgg -charnamemenu`
