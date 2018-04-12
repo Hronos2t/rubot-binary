@@ -18,11 +18,12 @@ official site https://rubotaion.ru
 - configurate bot and launch it
 
 ## Runing clients in 32-bit edition on Windows x64
-### NA
+### NA + XignCode (need to perform after each update)
 - rename or delete `<PathToGame>/bin64/aion.bin` file
 - download [xignCodeFake](https://github.com/Hronos2t/XCFakeClient/releases/download/v1-beta1/x3.xem) and replace file `<PathToGame>/bin32/XignCode/x3.xem`
-- start the game
+- start the game with launcher
 
-### EU - GameForge
+### EU GameForge
 - [!] use game launcher only for update
-- run `start bin32\aion.bin -ip:79.110.83.80 -port:2106 -cc:2 -lang:eng -noweb -noauthgg -charnamemenu`
+- run ```start bin32\aion.bin -ip:79.110.83.80 -port:2106 -cc:2 -lang:eng -noweb -noauthgg -charnamemenu```
+(you can execute this command by creating a `.bat` or `.cmd` file in <PathToGame> and write this line to it)
