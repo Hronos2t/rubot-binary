@@ -9,19 +9,19 @@ official site https://rubotaion.ru
 
 ## Aion-client supports
 - actual Game-forge client [EU] 32-bit edition
-- actual NA client 32-bit edition
+- ~~actual NA client 32-bit edition~~ until you find a new way to bypass xignCode...
 
 ## Steps to start
 - run Aion client in 32-bit edition
 - login to the game with your character
-- start the bot and select client version (`NA` or `EU`)
+- start the bot and select client version
 - configurate bot and launch it
 
 ## Runing clients
 ### NA + XignCode (need to perform after each update)
-- rename or delete `<GameFolder>/bin64/aion.bin` file
-- download [xignCodeFake](https://github.com/Hronos2t/XCFakeClient/releases/download/v1-beta1/x3.xem) and replace file `<GameFolder>/bin32/XignCode/x3.xem`
-- start the game with launcher
+- ~~rename or delete `<GameFolder>/bin64/aion.bin` file~~
+- ~~download [xignCodeFake](https://github.com/Hronos2t/XCFakeClient/releases/download/v1-beta1/x3.xem) and replace file `<GameFolder>/bin32/XignCode/x3.xem`~~
+- ~~start the game with launcher~~
 
 ### EU GameForge
 - [!] use game launcher only for update
